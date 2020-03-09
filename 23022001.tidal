@@ -1,0 +1,850 @@
+
+   d1 $
+      whenmod 8 5 (rot 2) $
+      every 16 (iter "2 4") $
+      every 2 (stutWith "<3 5 6 8>" ("<0.0625 0.0125>")(striate "<8 16 32>")) $
+      stack [
+      s "~ temph2*<[<0 2> [<1 0>]]>"
+      ,
+      s "bk(5,<6 8>)"
+      ,
+      -- s "tf?"
+      -- ,
+      loopAt 2 $
+      rot "<0 1 2>" $
+      s "af:1*<[[1 0] 2]> "]
+      |- n (every 1 (slow 3) $ run 4)
+      |- up "2 -2 3 7 -2"
+      # cut "4 -1"
+
+   d3 $
+      whenmod 6 4 (((# phasr "0.6 0.4 0.1" ) . (# phaserrate "0.01 0.001 0.1") . (# phaserdepth "0.4 0.5 0.7 0.3" ))) $
+      whenmod 8 6 (0.5 <~) $
+      slow 2 $
+      s "superwavemechanics*1 ~? pl*8 eau*8 "
+      |- n (every 3 (slow 4) $ run 2)
+      |- up "-1 6 4 2 -2 -1"
+      # cut "-1 -2 -3"
+
+   d1 $
+      whenmod 8 5 (rot 2) $
+      every 16 (iter 4) $
+      s "r2*4 bk*4 mrostinato*2 cf*8 "
+      |- n (every 1 (slow 3) $ run 4)
+      |- up "2 -2 3 7 -2"
+
+   d1 $
+      whenmod 6 4 (((# phasr "0.6 0.4 0.1" ) . (# phaserrate "0.01 0.001 0.1") . (# phaserdepth "0.4 0.5 0.7 0.3" ))) $
+      whenmod 8 6 (0.5 <~) $
+      s "superwavemechanics*1 bf*8 pl*8 eau*2 "
+      |- n (every 3 (slow 4) $ run 2)
+      |+ up "6 7 -1 3 8 6 6 7 6"
+
+   d1 $
+      whenmod 8 5 (rot 2) $
+      every 16 (iter 4) $
+      s "r2*4 bk*4 mrostinato*2 cf*4 "
+      |+ n (every 3 (slow 1.25) $ every 3 (rev) $ "2 9 1 3 0 7 2 7 6 5 10")
+      |- up "2 -2 3 7 -2"
+
+   d1 $
+      whenmod 6 4 (((# phasr "0.6 0.4 0.1" ) . (# phaserrate "0.01 0.001 0.1") . (# phaserdepth "0.4 0.5 0.7 0.3" ))) $
+      whenmod 8 6 (0.5 <~) $
+      s "cf*4 bf*8 pl*8 eau*2 "
+      |- n (every 3 (slow 4) $ run 2)
+      |+ up "6 7 -1 3 8 6 6 7 6"
+
+   d1 $
+      every 10 (# freq "250 600") $
+      whenmod 8 5 (rot 2) $
+      every 16 (iter 4) $
+      s "~*1 bk*2 mrostinato*2 cf*4 "
+      |+ n (every 3 (slow 1.25) $ every 3 (rev) $ "2 9 1 3 0 7 2 7 6 5 10")
+      |- up "2 -2 3 7 -2"
+
+   d1 $
+      whenmod 6 4 (((# phasr "0.6 0.4 0.1" ) . (# phaserrate "0.01 0.001 0.1") . (# phaserdepth "0.4 0.5 0.7 0.3" ))) $
+      whenmod 8 6 (0.5 <~) $
+      whenmod 16 10 (trunc (1/3)) $
+      s "cf*4 bf*8 pl*8 eau*2 "
+      |- n (every 3 (slow 4) $ run 2)
+      |+ up "6 7 -1 3 8 6 6 7 6"
+      # cut "-1 2"
+
+   d3 $
+      every 10 (# freq "250 600") $
+      whenmod 8 5 (rot 2) $
+      every 7 (rot 2) $
+      every 3 (chunk 4 (hurry 2) )$
+      whenmod 16 10 (density "1.5 2") $
+      s "~*4 bk*2 mrostinato*2 kicks*1 "
+      |+ n (every 3 (slow 1.25) $ every 3 (rev) $ "2 9 1 3 0 7 2 7 6 5 10")
+      |- up "2 -2 3 7 -2"
+      # cut "1 -2"
+
+   d1 $
+      whenmod 6 4 (((# phasr "0.6 0.4 0.1" ) . (# phaserrate "0.01 0.001 0.1") . (# phaserdepth "0.4 0.5 0.7 0.3" ))) $
+      whenmod 6 4 (|*| accelerate "-1") $
+      every 3 (loopAt 2) $
+      s "cf*4 bf*8 pl*8 eau*2 "
+      # n (every 3 (slow 4) $ run 2)
+      # up "6 7 -1 3 8 6 6 7 6"
+      # cut "1 -2"
+
+   d1 $
+      every 10 (# freq "250 600") $
+      whenmod 8 5 (rot 2) $
+      whenmod 7 5 (degrade) $
+      every 7 (rot 2) $
+      s "~*4 bk*2 mrostinato*2 kicks*1 "
+      |+ n (every 3 (slow 1.25) $ every 3 (rev) $ "2 9 1 3 0 7 2 7 6 5 10")
+      |- up "2 -2 3 7 -2"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 16 14 (0.5 <~) $
+      foldEvery [3,5] (((# phasr "0.6 0.4 0.1" ) . (# phaserrate "0.01 0.001 0.1") . (# phaserdepth "0.4 0.5 0.7 0.3" ))) $
+      every 4 (|*| accelerate "-1") $
+      s "cf*4 bf*8 pl*8 eau*2 "
+      |+ n (every 2 (0.25 ~>) $ every 1 (rev) $ every 2 (density 3) $ every 2 (palindrome) $ "0 2 9")
+      |+ up "6 7 -1 3 8 6 6 7 6"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (# freq "250 600") $
+      every 7 (0.5 ~>) $
+      whenmod 7 5 (degrade) $
+      every 7 (rot 2) $
+      s "~*4? cp*<8 2 4>  vk*<4 [8 2]> "
+      |+ up "6 8 1 2"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (degrade) $
+      whenmod 6 4 (|*| accelerate "-1") $
+      foldEvery [3,7] (loopAt 2) $
+      s "cf*4 bf*8? pl*8  "
+      |+ n (every 2 (0.25 ~>) $ every 1 (rev) $ every 2 (density 3) $ every 2 (palindrome) $ "0 2 9")
+      |+ up "6 7 -1 3 8 6 6 7 6"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (# freq "250 600") $
+      every 7 (0.5 ~>) $
+      whenmod 5 2 (rev) $
+      every 2 (rot "<2 3 4>") $
+      s "~*4 cp*<2 4> ~ vk*4 "
+      |- n (every 2 (rev) $ every 1 (0.25 <~) $ every 3 (rev) $ every 2 (rev) $ run 1)
+      |+ up "6 8 1 2"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (degrade) $
+      whenmod 6 4 (|*| accelerate "-1") $
+      loopAt 2 $
+      every 2 ((|* speed "-1").(slow 2)) $
+      s "cf*4 bf*4 pl*8  ~"
+      |+ n (every 2 (0.25 ~>) $ every 1 (rev) $ every 2 (density 3) $ every 2 (palindrome) $ "0 2 9")
+      |+ up "4 -1 6 -2 3"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (# freq "250 600") $
+      every 7 (0.5 ~>) $
+      whenmod 5 2 (rev) $
+      s "~*4 cp*<8 2 4> ~ vk*4 "
+      |- n (every 1 (density 1.25) $ every 3 (rev) $ run 5)
+      |+ up "6 8 1 2"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (degrade) $
+      every 10 (fast 2) $
+      slow 2 $
+      s "di:1*2 impacts:2*4 el:2*8 ~ "
+      |+ n (every 2 (0.25 ~>) $ every 1 (rev) $ every 2 (density 3) $ every 2 (palindrome) $ "0 2 9")
+      |+ up "4 -1 6 -2 3"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 8 6 (|*| speed "<0.5 -0.5>") $
+      whenmod 5 2 (rev) $
+      foldEvery [3,5] (loopAt  2) $
+      every 2 (slow 2) $
+      s "~*4 cf*8 31*1 vk*4 "
+      |- n (every 1 (density 1.25) $ every 3 (rev) $ run 5)
+      |+ up "6 8 1 2"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (degrade) $
+      every 10 (fast 2) $
+      s "dp*2 bf*4   "
+      |- n (every 3 (rev) $ run 2)
+      |+ up "-4 -4 5 3 3 5 7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 3 (spin "<2 3 4>") $
+      whenmod 8 6 (|*| speed "<0.5 -1 -0.5>") $
+      whenmod 5 2 (rev) $
+      s "impacts*2 dp*8 31*1 ek*2 "
+      |- n (every 1 (density 1.25) $ every 3 (rev) $ run 5)
+      |- up "-1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (degrade) $
+      every 2 (spin "<2 3>") $
+      every 10 (fast 2) $
+      s "cp:1*2 bf*4   "
+      |- n (every 3 (rev) $ run 2)
+      |+ up "-4 -4 5 3 3 5 7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 2 (spin 2) $
+      whenmod 8 6 (|*| speed "0.5 -1") $
+      every 10 (|+| crush "<15 10 16 12>") $
+      s "impacts*2 cp*<8 [[0 1] 2] [2 4] [[0 1] 4] 0> supersnare*4 vk*2 "
+      |- n (every 4 (0.25 <~) $ run 1)
+      |- up "4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 6 3 (rot 2) $
+      whenmod 7 4 (linger 0.25) $
+      every 2 (spin 2) $
+      every 7 (# sustain "0.4") $
+      s "ap:3*<[[0 2] 4] [0 [4 2]] [4 [0 2]] 4> ci:2*2 bp:3*<4 [2 1] [1 2] [1 4] [[0 2] 2]> sub*2 "
+      |- n (every 3 (rev) $ run 2)
+      |+ up "-4 7 1 1 7 7 3 -1 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 2 (spin "<2 4>") $
+      whenmod 6 3 (((|*| octer "0.4 0.4 0.6") . (|*| octersub "0.3") . (|*| octersubsub "0.001 0.1 0.1"))) $
+      whenmod 6 3 (chunk 4 (hurry 2)) $
+      every 10 (|+| crush "15") $
+      s "impacts*<2 1 4> cp*<[1 [2 0]] [2 [0 1]]>  super808*<4 2 4> vk*<[2 [1 0]] [1 [0 2]]> "
+      |- n (every 4 (0.25 <~) $ run 1)
+      # voice "0 1 2"
+      |- up "4 1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 6 3 (rot 2) $
+      whenmod 7 4 (chunk 2 (hurry 2)) $
+      every 2 (spin "<2 4>") $
+      every 7 (# sustain "0.4") $
+      s "dp*<[4 [2 0]] [2 [2 1]]> eh*<[2 [0 2]]> bp*<[0 [0 1]]> eh*<[0 [1 2]]> "
+      |+ n (every 4 (0.25 <~) $ every 3 (density 1.25) $ every 1 (0.25 ~>) $ every 3 (density 1.5) $ "6 12 0 7 8 2 1")
+      |+ up "-4 7 1 1 7 7 3 -1 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      -- whenmod 6 3 (((|*| octer "0.4 0.4 0.6") . (|*| octersub "0.3") . (|*| octersubsub "0.001 0.1 0.1"))) $
+      whenmod 7 5 (density 2) $
+      whenmod 8 5 (# sustain "0.2 0.6 0.8 0.4 0.2 0.4 0.6") $
+      -- every 3 (spin 2) $
+      -- every 2 (slow 2) $
+      slow 2 $
+      s "impacts*2 ch*2 supersnare*4 percs*2 "
+      |+ n (every 2 (palindrome) $ every 3 (0.25 <~) $ "10 5 2 9")
+      |- up "4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 8 6 (|*| coarse "<2 4 12>") $
+      every 2 (spin "<2 4>") $
+      every 4 (0.25 <~) $
+      foldEvery [3,15] (ghost) $
+      every 7 (# sustain "<0.4 0.1 0.02 0.6>") $
+      s "<fp broh>*<[<2 1 2> [<2 1 2 0> <1 2>] [<1 2 0> [<0 2 1> <2 1 0 2>]]]> grk*<[<2 1 2> [<2 1 4 2> <2 4 1>]] [<2 1> [<2 4 1> <1 2 4>]] 2> cp:1*[<1 2 4 0> [<0 2 4>] [<2 4 0>]] sub*<2 1> "
+      |+ n (every 4 (0.25 <~) $ every 3 (density 1.25) $ every 1 (0.25 ~>) $ every 3 (density 1.5) $ "6 12 0 7 8 2 1")
+      |+ up "4 3"
+      # cut "-1 -2 3 -4 -1"
+
+   d1 $
+      every 5 (jux (|* speed "-1 -0.5")) $
+      whenmod 6 3 (((|*| octer "0.4 0.4 0.6") . (|*| octersub "0.3") . (|*| octersubsub "0.001 0.1 0.1"))) $
+      whenmod 7 5 (density 2) $
+      whenmod 8 5 (# sustain "0.2 0.06 0.8 0.04 0.2 0.04 0.6") $
+      slow 4 $
+      s "notif:4*1 tf:1 pl*2 aol:3*2 "
+      |- n (every 2 (slow 2) $ every 1 (0.25 <~) $ run 2)
+      |- up "4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 5 (# freq "200 400 120") $
+      foldEvery [3,11] (spin 2) $
+      every 10 (|*| speed "<-1 -2 -0.5>") $
+      every 7 (# sustain "0.4 0.05") $
+      s "brop*2 super808*4 bp*1 bbss*2 "
+      |+ n (every 4 (0.25 <~) $ every 3 (density 1.25) $ every 1 (0.25 ~>) $ every 3 (density 1.5) $ "6 12 0 7 8 2 1")
+      |+ up "4 3"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      -- every 6 (|*| decay "0.4") $
+      every 3 ((ghost)) $
+      stack [
+      density "1 2" $
+      every 2 (density "<1 2>") $
+      whenmod 7 5 (spin "<2 1>") $
+      s "super808*<[1 [0 2]] [2 1] 4> ~?"
+      ,
+      every 5 (jux (rev)) $
+      s "~ supersnare*<0 [0 1] [0 [2 0]] [2 0]>"
+      ,
+      s "tc*<[8 4] [16 8] [8 16] 4 [4 [8 2]]>"
+      # att "<0.02 0.06 0.08 0.04 0.02 0.04 0.06>"
+      |-| n (every 2 (slow 2) $ every 1 (0.25 <~) $ run 2)
+      ]
+      -- |- up "7 2 -2"
+      # n "0 0.1"
+      -- # cut "-1 -2 3 4 -1"
+
+-- fin edit 230220 13:00
+
+
+   d1 $
+      every 2 (rev) $
+      every 16 (spin 2) $
+      every 10 (|*| up "1") $
+      every 7 (# sustain "0.4") $
+      s "brop*2 grk*2 bp*1 henon*2 "
+      |+ n (every 3 (rev) $ "3 0")
+      |+ up "4 3"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 5 (jux (rev)) $
+      every 6 (|*| decay "0.4") $
+      whenmod 8 5 (# sustain "0.2 0.6 0.8 0.4 0.2 0.4 0.6") $
+      s "birds3*2 super808*2 supersnare*1 grprc*1 "
+      |- n (every 2 (slow 2) $ every 1 (0.25 <~) $ run 6)
+      |- up "7 2 -2"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 6 (degrade) $
+      every 2 (rev) $
+      every 16 (spin 2) $
+      every 10 (|*| up "1") $
+      whenmod 8 5 (0.25 ~>) $
+      s "brop*1 grk*2 bp*1 ci*2 "
+      |+ n (every 3 (rev) $ "3 0")
+      |- up "8 -2 -4 1 3"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 6 3 (|*| voice "1") $
+      every 6 (|*| decay "0.4") $
+      whenmod 7 5 (rot 2) $
+      whenmod 7 4 (|*| shape "0.4") $
+      s "birds3*2 super808*2 tn*2 grprc*1 "
+      |- n (every 2 (slow 2) $ every 1 (0.25 <~) $ run 6)
+      |+ up "8 8 -4 2 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 7 5 (# freq "150") $
+      every 2 (rev) $
+      every 16 (spin 2) $
+      every 5 (((|*| fshift "0.2") . (|*| fshiftnote "0.9") . (|*| fshiftphase "0.001 0.1 0.2"))) $
+      s "bs*8 grk*2  ci*2 "
+      |- n (every 1 (palindrome) $ every 2 (slow 1.5) $ run 7)
+      |- up "7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 7 5 (jux (rev)) $
+      every 8 (fast 2) $
+      whenmod 7 5 (rot 2) $
+      whenmod 12 6 (|+| legato "0.2") $
+      s "bm*2 super808*2 tn*2 grprc*2 "
+      |- n (every 1 (rev) $ every 2 (palindrome) $ every 2 (rev) $ run 9)
+      |+ up "4 -4 6 5 1 2 -4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 7 5 (# freq "150") $
+      every 2 (rev) $
+      whenmod 8 6 (trunc (3/8)) $
+      every 5 (((|*| fshift "0.2") . (|*| fshiftnote "0.9") . (|*| fshiftphase "0.001 0.1 0.2"))) $
+      s "bs*8 grk*8  ci*2 "
+      |- n (every 1 (rev) $ every 3 (density 2) $ every 2 (0.25 <~) $ every 2 (palindrome) $ every 1 (rev) $ every 3 (0.25 <~) $ run 8)
+      |- up "7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 3 (|*| pitch1 "2") $
+      whenmod 6 4 (rot 4) $
+      every 8 (fast 2) $
+      whenmod 7 5 (rot 2) $
+      whenmod 12 6 (|+| legato "0.2") $
+      s "bm*2 super808*8 tn*4 grprc*2 "
+      |+ n (every 1 (slow 1.5) $ "8 9 3")
+      |+ up "4 -4 6 5 1 2 -4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 7 5 (# freq "150") $
+      whenmod 7 5 (|*| pan (sine)) $
+      whenmod 8 6 (trunc (3/8)) $
+      every 16 (|*| pitch1 "3") $
+      s "bs*8 supergong*4 pm*2 ci*2 "
+      |- n (every 1 (rev) $ every 3 (density 2) $ every 2 (0.25 <~) $ every 2 (palindrome) $ every 1 (rev) $ every 3 (0.25 <~) $ run 8)
+      |- up "7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 3 (|*| pitch1 "2") $
+      whenmod 6 4 (rot 4) $
+      whenmod 7 4 (((|*| octer "0.6") . (|*| octersub "0.4") . (|*| octersubsub "0.1 0.2 0.1"))) $
+      whenmod 5 2 (|*| decay "0.4") $
+      s "bm*2  handclapsmash2*1 bottle*2 "
+      |+ n (every 1 (slow 1.5) $ "8 9 3")
+      |+ up "4 -4 6 5 1 2 -4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 8 5 (rot 4) $
+      whenmod 8 5 (0.5 <~) $
+      whenmod 8 6 (trunc (3/8)) $
+      every 2 (((|*| octer "0.6") . (|*| octersub "0.95 0.7 0.4 0.1") . (|*| octersubsub "0.01 0.1 0.1"))) $
+      every 16 (|*| pitch1 "3") $
+      s "hihat*2 supergong*4 pm*2 v1*2 "
+      |- n (every 1 (rev) $ every 3 (density 2) $ every 2 (0.25 <~) $ every 2 (palindrome) $ every 1 (rev) $ every 3 (0.25 <~) $ run 8)
+      |+ up "7"
+      # cut "-1 -2 3 4 -1"
+
+
+   d1 $
+      every 3 (|*| pitch1 "2") $
+      whenmod 6 4 (rot 4) $
+      whenmod 7 4 (((|*| octer "0.6") . (|*| octersub "0.4") . (|*| octersubsub "0.1 0.2 0.1"))) $
+      whenmod 5 2 (|*| decay "0.4") $
+      s "bm*1  handclapsmash2*1 bottle*2 "
+      |+ n (every 3 (density 2) $ "1 0 12 1 11 2 0 10 3 4 1 0 0 4 6 3 1 0 9 8")
+      |- up "4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 8 5 (rot 4) $
+      whenmod 8 5 (0.5 <~) $
+      whenmod 8 6 (trunc (3/8)) $
+      every 2 (((|*| octer "0.6") . (|*| octersub "0.95 0.7 0.4 0.1") . (|*| octersubsub "0.01 0.1 0.1"))) $
+      every 16 (|*| pitch1 "3") $
+      s "hihat*2 supergong*2 pm*2 v1*2 "
+      |- n (every 1 (rev) $ every 3 (density 2) $ every 2 (0.25 <~) $ every 2 (palindrome) $ every 1 (rev) $ every 3 (0.25 <~) $ run 8)
+      |+ up "7 -1 5 8 2 -4 -2 -4 -2 2 7 3 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 3 (|*| pitch1 "2") $
+      whenmod 6 4 (rot 4) $
+      whenmod 7 4 (((|*| octer "0.6") . (|*| octersub "0.4") . (|*| octersubsub "0.1 0.2 0.1"))) $
+      whenmod 5 2 (|*| decay "0.4") $
+      s "bm*1  handclapsmash2*1 bottle*2 "
+      |+ n (every 3 (density 2) $ "1 0 12 1 11 2 0 10 3 4 1 0 0 4 6 3 1 0 9 8")
+      |- up "4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 8 5 (rot 4) $
+      whenmod 8 5 (0.5 <~) $
+      whenmod 8 6 (trunc (3/8)) $
+      every 2 (((|*| octer "0.6") . (|*| octersub "0.95 0.7 0.4 0.1") . (|*| octersubsub "0.01 0.1 0.1"))) $
+      every 16 (|*| pitch1 "3") $
+      s "hihat*4 supergong*2 as*2 v1*2 "
+      |+ n (every 1 (rev) $ every 4 (palindrome) $ "2 0")
+      |+ up "7 -1 5 8 2 -4 -2 -4 -2 2 7 3 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 3 (|*| pitch1 "2") $
+      whenmod 6 4 (rot 4) $
+      whenmod 7 4 (((|*| octer "0.6") . (|*| octersub "0.4") . (|*| octersubsub "0.1 0.2 0.1"))) $
+      whenmod 5 2 (|*| decay "0.4") $
+      s "hihat*2  handclapsmash2*2 bottle*2 "
+      |+ n (every 3 (density 2) $ "1 0 12 1 11 2 0 10 3 4 1 0 0 4 6 3 1 0 9 8")
+      |- up "4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 8 5 (rot 4) $
+      whenmod 8 5 (0.5 <~) $
+      whenmod 8 6 (trunc (3/8)) $
+      every 2 (((|*| octer "0.6") . (|*| octersub "0.95 0.7 0.4 0.1") . (|*| octersubsub "0.01 0.1 0.1"))) $
+      every 16 (|*| voice "4 4 5 2.5") $
+      s "hihat*4 supergong*2 as*2 v1*2 "
+      |+ n (every 1 (rev) $ every 4 (palindrome) $ "2 0")
+      |+ up "7 -1 5 8 2 -4 -2 -4 -2 2 7 3 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 3 (|*| pitch1 "2") $
+      whenmod 6 4 (((# phasr "0.1 0.3" ) . (# phaserrate "0.001 0.1 0.001 0.1 0.2 0.1") . (# phaserdepth "0.3" ))) $
+      whenmod 7 4 (((|*| octer "0.6") . (|*| octersub "0.4") . (|*| octersubsub "0.1 0.2 0.1"))) $
+      whenmod 5 2 (|*| decay "0.4") $
+      s "hihat*2  nk*4 bottle*2 "
+      |+ n (every 3 (density 2) $ "1 0 12 1 11 2 0 10 3 4 1 0 0 4 6 3 1 0 9 8")
+      |- up "4"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 8 5 (rot 4) $
+      whenmod 8 5 (0.5 <~) $
+      every 10 (|*| begin "0.25") $
+      every 16 (|*| voice "4 4 5 2.5") $
+      s "hihat*4 supergong*2 as*2 v1*2 "
+      |+ n (every 1 (rev) $ every 4 (palindrome) $ "2 0")
+      |+ up "7 -1 5 8 2 -4 -2 -4 -2 2 7 3 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (fast 2) $
+      whenmod 6 4 (((# phasr "0.1 0.3" ) . (# phaserrate "0.001 0.1 0.001 0.1 0.2 0.1") . (# phaserdepth "0.3" ))) $
+      whenmod 7 4 (((|*| octer "0.6") . (|*| octersub "0.4") . (|*| octersubsub "0.1 0.2 0.1"))) $
+      whenmod 5 2 (|*| decay "0.4") $
+      s "hihat*2 superkick*8 nk*4 eau*8 "
+      |+ n (every 3 (density 2) $ "1 0 12 1 11 2 0 10 3 4 1 0 0 4 6 3 1 0 9 8")
+      |- up "5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (0.25 <~) $
+      whenmod 8 5 (0.5 <~) $
+      every 10 (|*| begin "0.25") $
+      every 16 (|*| voice "4 4 5 2.5") $
+      s "hihat*4 supergong*2 as*2 v1*2 "
+      |+ n (every 1 (rev) $ every 4 (palindrome) $ "2 0")
+      |+ up "7 -1 5 8 2 -4 -2 -4 -2 2 7 3 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (fast 2) $
+      whenmod 6 4 (((# phasr "0.1 0.3" ) . (# phaserrate "0.001 0.1 0.001 0.1 0.2 0.1") . (# phaserdepth "0.3" ))) $
+      every 10 (fast 2) $
+      whenmod 5 2 (|*| decay "0.4") $
+      s "hihat*2 superkick*8 nk*4 eau*8 "
+      |+ n (every 3 (density 2) $ "1 0 12 1 11 2 0 10 3 4 1 0 0 4 6 3 1 0 9 8")
+      |- up "5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (0.25 <~) $
+      whenmod 8 5 (0.5 <~) $
+      every 10 (|*| begin "0.25") $
+      every 16 (|*| voice "4 4 5 2.5") $
+      s "tcp*4  as*2 v1*2 "
+      |+ n (every 1 (rev) $ every 4 (palindrome) $ "2 0")
+      |+ up "7 -1 5 8 2 -4 -2 -4 -2 2 7 3 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (fast 2) $
+      whenmod 6 4 (((# phasr "0.1 0.3" ) . (# phaserrate "0.001 0.1 0.001 0.1 0.2 0.1") . (# phaserdepth "0.3" ))) $
+      every 10 (fast 2) $
+      whenmod 5 2 (|*| decay "0.4") $
+      s "hihat*4 superkick*8 nk*4 eau*4 "
+      |- n (every 2 (0.25 ~>) $ every 3 (0.25 ~>) $ run 3)
+      |- up "5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (0.25 <~) $
+      whenmod 8 5 (0.5 <~) $
+      whenmod 5 3 (|+| coarse "2") $
+      every 10 (|*| begin "0.25") $
+      every 16 (|*| voice "4 4 5 2.5") $
+      s "tcp*4  as*2 v1*2 "
+      |+ n (every 2 (0.25 <~) $ "12 8 7 9 9 8 10 9 1")
+      |+ up "7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (fast 2) $
+      whenmod 6 4 (((# phasr "0.1 0.3" ) . (# phaserrate "0.001 0.1 0.001 0.1 0.2 0.1") . (# phaserdepth "0.3" ))) $
+      every 10 (fast 2) $
+      whenmod 6 4 (degrade) $
+      s "hihat*4 superkick*8 nk*4 eau*4 "
+      |- n (every 2 (0.25 ~>) $ every 3 (0.25 ~>) $ run 3)
+      |- up "5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (0.25 <~) $
+      whenmod 5 3 (|+| coarse "2") $
+      every 10 (|*| begin "0.25") $
+      s "tcp*4  as*2 ah*8 "
+      |+ n (every 2 (0.25 <~) $ "12 8 7 9 9 8 10 9 1")
+      |+ up "7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (fast 2) $
+      whenmod 6 4 (((# phasr "0.1 0.3" ) . (# phaserrate "0.001 0.1 0.001 0.1 0.2 0.1") . (# phaserdepth "0.3" ))) $
+      every 10 (fast 2) $
+      whenmod 6 4 (degrade) $
+      every 6 (|*| accelerate "-0.5 -0.5 -0.5") $
+      s "hihat*4 superkick*8 nk*4 eau*4 "
+      |- n (every 2 (0.25 ~>) $ every 3 (0.25 ~>) $ run 3)
+      |- up "5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 4 (rev) $
+      whenmod 5 3 (|+| coarse "2") $
+      every 10 (|*| begin "0.25") $
+      s "tcp*2  as*2 ah*8 "
+      |+ n (every 2 (0.25 <~) $ "12 8 7 9 9 8 10 9 1")
+      |+ up "7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (fast 2) $
+      whenmod 6 4 (((# phasr "0.1 0.3" ) . (# phaserrate "0.001 0.1 0.001 0.1 0.2 0.1") . (# phaserdepth "0.3" ))) $
+      every 10 (fast 2) $
+      whenmod 6 4 (degrade) $
+      every 6 (|*| accelerate "-0.5 -0.5 -0.5") $
+      s "hihat*4 eau*4  sfx*8 "
+      |- n (every 2 (0.25 ~>) $ every 3 (0.25 ~>) $ run 3)
+      |- up "5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 4 (rev) $
+      whenmod 5 3 (|+| coarse "2") $
+      every 10 (|*| begin "0.25") $
+      s "tcp*2  as*2 ah*2 "
+      |+ n (every 2 (0.25 <~) $ "12 8 7 9 9 8 10 9 1")
+      |+ up "4 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (fast 2) $
+      whenmod 6 4 (((# phasr "0.1 0.3" ) . (# phaserrate "0.001 0.1 0.001 0.1 0.2 0.1") . (# phaserdepth "0.3" ))) $
+      every 10 (fast 2) $
+      every 6 (|*| accelerate "-0.5 -0.5 -0.5") $
+      s "hihat*2 eau*8  sfx*8 "
+      |- n (every 2 (0.25 ~>) $ every 3 (0.25 ~>) $ run 3)
+      |+ up "2 -1 7 6 2 3"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 16 (trunc (1/4)) $
+      whenmod 5 3 (|+| coarse "2") $
+      every 10 (|*| begin "0.25") $
+      s "tcp*2  glasso*2 ah*2 "
+      |- n (every 3 (0.25 <~) $ run 2)
+      |+ up "4 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (|+| coarse "32 12 4") $
+      every 10 (fast 2) $
+      every 6 (|*| accelerate "-0.5 -0.5 -0.5") $
+      s "comb*8 eau*8 tv*1 sfx*8 "
+      |- n (every 1 (rev) $ every 3 (palindrome) $ run 7)
+      |+ up "2 -1 7 6 2 3"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 16 (trunc (1/4)) $
+      whenmod 5 3 (|+| coarse "2") $
+      every 5 (((# phasr "0.6 0.2" ) . (# phaserrate "0.01 0.2 0.2") . (# phaserdepth "0.4" ))) $
+      s "tcp*2 superfork*4 glasso*2 ah*2 "
+      |- n (every 3 (0.25 <~) $ run 2)
+      |+ up "4 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (|+| coarse "32 12 4") $
+      every 10 (fast 2) $
+      every 6 (|*| accelerate "-0.5 -0.5 -0.5") $
+      s "comb*8 eau*8 tv*1 harpsichord1*2 "
+      |- n (every 1 (rev) $ every 3 (palindrome) $ run 7)
+      |+ up "2 -1 7 6 2 3"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 16 (trunc (1/4)) $
+      every 5 (((# phasr "0.6 0.2" ) . (# phaserrate "0.01 0.2 0.2") . (# phaserdepth "0.4" ))) $
+      s "dt*4 superfork*4 glasso*4 pl*1 "
+      |- n (every 3 (0.25 <~) $ run 2)
+      |+ up "4 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (|+| coarse "32 12 4") $
+      s "comb*2 eau*8 tv*1 harpsichord1*2 "
+      |- n (every 1 (rev) $ every 3 (palindrome) $ run 7)
+      |- up "5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 16 (trunc (1/4)) $
+      every 5 (((# phasr "0.6 0.2" ) . (# phaserrate "0.01 0.2 0.2") . (# phaserdepth "0.4" ))) $
+      whenmod 7 5 (0.5 ~>) $
+      s "dt*4 superfork*4 glasso*4 pl*1 "
+      |- n (every 2 (0.25 <~) $ every 4 (density 2) $ every 3 (0.25 ~>) $ every 2 (0.25 <~) $ every 2 (slow 1.25) $ run 8)
+      |+ up "4 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (|+| coarse "32 12 4") $
+      s "comb*2 dp*2 hold*8 tempp*2 "
+      |- n (every 1 (rev) $ every 3 (palindrome) $ run 7)
+      |- up "5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (|*| speed "0.5") $
+      whenmod 7 5 (0.5 ~>) $
+      s "dt*4 superfork*4 glasso*4 pl*1 "
+      |- n (every 2 (0.25 <~) $ every 4 (density 2) $ every 3 (0.25 ~>) $ every 2 (0.25 <~) $ every 2 (slow 1.25) $ run 8)
+      |- up "6 -4 3 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 5 (|*| speed "0.5") $
+      every 10 (|+| coarse "32 12 4") $
+      s " dp*8 hold*8 tempp*2 "
+      |- n (every 1 (slow 1.5) $ run 8)
+      |- up "5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (|*| speed "0.5") $
+      whenmod 7 5 (0.5 ~>) $
+      s "dt*4 superfork*4 glasso*4 pl*1 "
+      |- n (every 2 (0.25 <~) $ every 4 (density 2) $ every 3 (0.25 ~>) $ every 2 (0.25 <~) $ every 2 (slow 1.25) $ run 8)
+      |- up "6 -4 3 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 5 (|*| speed "0.5") $
+      whenmod 7 5 (0.25 ~>) $
+      s " dp*8 hold*8 tempp*2 "
+      |- n (every 1 (slow 1.5) $ run 8)
+      |+ up "2 -1 2"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (|*| speed "0.5") $
+      whenmod 7 5 (0.5 ~>) $
+      s "dt*4 superfork*8 glasso*4 pl*1 "
+      |- n (every 2 (0.25 <~) $ every 4 (density 2) $ every 3 (0.25 ~>) $ every 2 (0.25 <~) $ every 2 (slow 1.25) $ run 8)
+      |- up "6 -4 3 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 5 (|*| speed "0.5") $
+      whenmod 7 5 (0.25 ~>) $
+      s " dp*8 hold*2 tempp*8 "
+      |- n (every 1 (slow 1.5) $ run 8)
+      |+ up "2 -1 2"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (|*| speed "0.5") $
+      whenmod 7 5 (0.5 ~>) $
+      s "dt*2 superfork*8 glasso*1 pl*2 "
+      |- n (every 1 (0.25 <~) $ every 4 (slow 1.25) $ every 3 (0.25 <~) $ every 4 (palindrome) $ every 4 (0.25 ~>) $ run 1)
+      |- up "6 -4 3 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 5 (|*| speed "0.5") $
+      whenmod 7 5 (0.25 ~>) $
+      every 1 (|*| decay "0.15 0.6") $
+      s " dp*8 hold*2 tempp*8 "
+      |- n (every 1 (slow 1.5) $ run 8)
+      |- up "-2 2 6 3 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 10 (|*| speed "0.5") $
+      whenmod 8 5 (0.5 <~) $
+      s "v3*1 bi*8 glasso*1 birds3*2 "
+      |+ n (every 3 (0.25 <~) $ "5 8 11 12 9 2 2 5 6 8 8 8 10 8 10 3")
+      |- up "6 7 8 8 7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 4 (|+| up "10 6 7") $
+      whenmod 5 2 (density (4/3)) $
+      every 1 (|*| decay "0.15 0.6") $
+      s "rave3*2 dp*8 hold*2 tempp*8 "
+      |+ n (every 3 (density 3) $ "1 5 4")
+      |- up "-2 2 6 3 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 8 5 (0.5 <~) $
+      s "v3*1 bi*8 rs*1 birds3*8 "
+      |+ n (every 3 (0.25 <~) $ "5 8 11 12 9 2 2 5 6 8 8 8 10 8 10 3")
+      |- up "6 7 8 8 7"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 4 (|+| up "10 6 7") $
+      whenmod 5 2 (density (4/3)) $
+      every 1 (|*| decay "0.15 0.6") $
+      s "rave3*8 bbss*4 hold*2 tempp*8 "
+      |+ n (every 3 (density 3) $ "1 5 4")
+      |- up "-2 2 6 3 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 8 (spin 4) $
+      every 1 (trunc (3/8)) $
+      whenmod 8 5 (0.5 <~) $
+      s "v3*1 bi*2 rs*1 birds3*8 "
+      |+ n (every 3 (0.25 <~) $ "5 8 11 12 9 2 2 5 6 8 8 8 10 8 10 3")
+      |+ up "1 3 2 8"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 4 (|+| up "10 6 7") $
+      whenmod 5 2 (density (4/3)) $
+      every 4 (rev) $
+      s "rave3*8 bbss*4  tempp*8 "
+      |- n (every 2 (0.25 ~>) $ every 4 (0.25 <~) $ run 4)
+      |- up "-2 2 6 3 5"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 8 (spin 4) $
+      every 3 (|*| accelerate "1.2 1.2") $
+      every 1 (trunc (3/8)) $
+      whenmod 8 5 (0.5 <~) $
+      s "v3*1 rave*4 rs*8 cyclo*2 "
+      |- n (every 4 (density 4) $ every 2 (palindrome) $ every 2 (palindrome) $ every 3 (0.25 <~) $ every 3 (0.25 ~>) $ every 2 (rev) $ every 4 (0.25 ~>) $ run 9)
+      |+ up "1 3 2 8"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      every 4 (|+| up "10 6 7") $
+      whenmod 8 6 (0.5 <~) $
+      whenmod 12 6 (|+| coarse "16") $
+      every 4 (rev) $
+      s "rave3*8 bbss*8 909*2 rs*8 "
+      |- n (every 2 (0.25 ~>) $ every 4 (0.25 <~) $ run 4)
+      |+ up "1 -4 -1"
+      # cut "-1 -2 3 4 -1"
+
+   d1 $
+      whenmod 5 2 (slow 1.5) $
+      every 8 (spin 4) $
+      every 3 (|*| accelerate "1.2 1.2") $
+      every 1 (trunc (3/8)) $
+      whenmod 8 5 (0.5 <~) $
+      s "v3*8 rave*2 rs*8 cyclo*2 "
+      |- n (every 4 (density 4) $ every 2 (palindrome) $ every 2 (palindrome) $ every 3 (0.25 <~) $ every 3 (0.25 ~>) $ every 2 (rev) $ every 4 (0.25 ~>) $ run 9)
+      |+ up "1 3 2 8"
+      # cut "-1 -2 3 4 -1"

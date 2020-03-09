@@ -1,0 +1,634 @@
+d1 $
+  stack [
+    every 8 ((slow 2) . (# s "~")) $
+    whenmod 8 5 (density 2) $
+    seqPLoop [
+      (0,15,whenmod 6 4 (spin 4) $
+      whenmod 5 3 (|*| freq "600") $
+      every 4 (((|*| octer "0.4 0.6") . (|*| octersub "0.8") . (|*| octersubsub "2"))) $
+      every 3 (linger 0.25) $
+      s "<oneclap_thor superhat>*2 trianglewavebells*4 jilet*4 superphase*8 "
+      # n (every 3 (0.25 <~) $ run 5)
+      # up "6 1 1 4 -1 5 7 -2 -4 -2")
+      ,
+      (16,31,whenmod 6 4 (spin 4) $
+      every 6 (linger 0.5) $
+      every 4 (((|*| octer "0.4 0.6") . (|*| octersub "0.8") . (|*| octersubsub "0.3"))) $
+      every 3 (linger 0.25) $
+      s "superhat*4 supermandolin*8 jilet*4 superphase*8 "
+      # n (every 3 (0.25 <~) $ run 5)
+      # up "3 -7 2 -2 2 -2")
+      ,
+      (32,47,every 2 (iter 2) $
+      whenmod 8 5 (density 2) $
+      whenmod 6 4 (jux (rev)) $
+      every 5 (((|*| delay "0.1") . (|*| delaytime "0.1 0.001") . (|*| delayfeedback "0.6 0.95 0.95"))) $
+      s "supermandolin*2 noisy*2 supergong*4 <superphase cyclo>*2 "
+      # n (every 3 (density 2) $ "1 9 0 11")
+      # up "8 6 3 5 3 -3 3 -4")
+      ,
+      (48,63,whenmod 8 5 (|*| pitch1 "3") $
+      whenmod 10 4 (density 2) $
+      whenmod 5 3 (trunc (1/4)) $
+      whenmod 6 4 (|*| freq "600") $
+      whenmod 8 3 (# coarse "2 6 12") $
+      every 2 (# up "2 7") $
+      every 5 (((|*| delay "0.1") . (|*| delaytime "0.1 0.001") . (|*| delayfeedback "0.6 0.95 0.95"))) $
+      s "supermandolin*<2 4 3> <babbl superhex>*2 supergong*1 <voicform superdrop>*<1 2 4> "
+      # n (every 3 (0.25 ~>) $ "1 2 3 8 5 4 1 2 5 3")
+      # up "-4 -6 1 -7 -3")
+    ]
+    # cut 300
+    ,
+    seqPLoop [
+      (0,15, whenmod 6 3 (# voice "2.5 1 0.25 0.5 0.1 1") $
+      whenmod 5 3 (# sustain "0.4 0.6 0.1 0.7 0.2") $
+      whenmod 7 4 (# coarse "2 1 0 3 2 0 1") $
+      s "[drum_kick(<3 5>,8,<0 1>),  super808(<7 9>,<8 16>,<0 2>), tk(<4 9 13 7 12 5>,16,<0 1>) ] "
+      # n (every 4 (0.25 ~>) $ "4 0 9 1 2 0 1 0 1 2")
+      # up "6 4 2 2 5 1 7 2 -2" )
+      ,
+      (16,31,foldEvery [7,15] (density 2) $
+      -- every 3 (fast "2 1.5")$
+      whenmod 8 3 ((# cut "-1").(slowspread ($) [rot "<2 1>", slow 2, (# accelerate "1 0.5 -0.25 -1 2")])) $
+      every 4 ((jux (# accelerate "-1").(rev).(# n "0 1 2 ")). every 2 (linger "<0.25 0.75>"))$
+      whenmod 6 3 (# voice "2.5 0.25 1 0.4 0.2 0.1 1 2 0.4") $
+      whenmod 5 3 (# sustain "0.4 0.1 0.2 0.06 0.9 0.4") $
+      whenmod 5 2 ((1/4) <~) $
+      -- s "drum_kick*2   super808*<4 2> drum_kick*<4 2 1>  "
+      s "[drum_kick(<5 3 7 2>,8,<10 12>),  super808(<7 5 3 9>,<8 16>,<0 2>), tk(<4 12 15 7 5>,16,<0 1>) ] "
+      # n (every 4 (0.25 ~>) $ "4 0 9 1 2 0 1 0 1 2")
+      # up "6 4 2 2 5 1 7 2 -2" )
+    ]
+    -- # cut 6000
+    # sustain "0.2 0.5 0.3"
+  ]
+
+
+
+
+   d1 $
+    seqPLoop [
+      (0,15, every 6 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.01 0.1"))) $
+      every 5 (stut' 4 (0.0625/2) (# speed "1.5")) $
+      every 8 (# voice "0 1 0 0.5 1 2 4") $
+      stack [
+        every 3 (# freq "100") $
+        s "spook2(2,6)"
+        # up "3 5 8 10 4 -7 -24 10 3"
+        ,
+        s "super808(<7 3 10 4>,12)"
+        # n "0 1 2"
+        # up 0
+        ,
+        every 2 (((# fshift "0.5") . (# fshiftnote "0.5 0.5") . (# fshiftphase "0.1 0.001 0.1"))) $
+        s "clap_oto309(5,12)"
+        ,
+        s "superrand(3,12,2)"
+        # n (every 3 (0.25 <~) $ "0 1 0 5 8 3 2 4 7 6 2 3 7 5 9 4 5 8")
+      ]
+      )
+      ,
+      (16,31, every 6 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.01 0.1"))) $
+      every 8 (# voice "4 0.25 1 0.5 5 6 1 2") $
+      every 5 (stut' 4 (0.0625/2) (# speed "2.5")) $
+      whenmod 4 2 (density 1.5) $
+      stack [
+        every 3 (# freq "100") $
+        s "spook2(<2 3>,6)"
+        # up "3 5 8 7 10 -12 5 -20 14 5 3"
+        ,
+        s "super808(<7 10 3>,12,<0 1>)"
+        # n "0 1 2"
+        # up 0
+        ,
+        s "clap_oto309(<5 7>,12)"
+        ,
+        s "superrand(<3 1>,12,2)"
+        # n (every 3 (0.25 <~) $ "0 1 0 5 8 3 2 4 7 6 2 3 7 5 9 4 5 8")
+        ]
+      )
+      ,
+      (32,47, every 6 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.01 0.1"))) $
+      every 8 (# voice "4") $
+      every 5 (stut' 4 (0.0625/2) (# speed "3.5")) $
+      every 3 (# freq "100") $
+      every 4 (fast 1.5) $
+      stack [
+      s "superfff(<2 3>,6)"
+      # up "3 0 1 -2 3"
+      ,
+      s "super808(<7 10 3 8>,12,<0 2>)"
+      # up 0
+      # n 0
+      ,
+      s "clap_oto309(<5 7>,12)"
+      ,
+      s "superrand(<3 1>,12,2) "
+      # n (every 3 (0.25 <~) $ "0 10 5 8 3 24 7 -6 2 3 7 5 9 4 5 8")
+        ]
+      )
+      ,
+      (48,63, every 6 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.01 0.1"))) $
+      every 8 (# voice "4") $
+      whenmod 8 5 (spin 2) $
+      every 3 (# freq "100") $
+      every 4 (density 1.5) $
+      stack [
+        s "supergrind(<2 3>,6)"
+        # n (every 3 (0.25 <~) $ every 3 (palindrome) $ every 1 (slow 2) $ every 3 (rev) $ "0 10 5 8 3 24 7 -6 2 3 7 5 9 4 5 8")
+        ,
+        s "super808(<7 10 3 8>,102,<0 1 2?>)"
+        # n 0
+        # up 0
+        ,
+        s "clap_oto309(<5 7>,12)"
+        ,
+        s "superrand(<3 1>,12,2)"
+        # up "-1 0 10 5 8 3 24 7 -6 5 4 7 -6 8 6 8 1"
+      ]
+    )
+  ]
+  # sustain 0.3
+
+
+do
+   d1 $
+      every 3 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.21 2.1"))) $
+      whenmod 8 5 (spin "2 1") $
+      whenmod 7 4 (density 1.5) $
+      stack [
+      s "supergong(3,4)"
+      # n (every 3 (0.25 <~) $ every 6 (palindrome) $ every 3 (slow 2) $ every 5 (rev) $ "0 10 5 8 3 24 7 -6 2 3 7 5 9 4 5 8")
+      # accelerate "1 2 1.3 1.4 0.5 1.2"
+      # voice "0 1 2 "
+      # freq "{1000 400 2000 600 8700 800 100}%4"
+      ,
+      every 3 (chunk 4 (# accelerate "0.2 0.1 0.3")) $
+      s "superhat(3,8)"
+      # n (every 3 (0.25 <~) $ every 4 (palindrome) $ every 2 (slow 2) $ every 3 (rev) $ "0 1 0 5 8 3 2 4 7 -6 2 3 7 5 9 4 5 8")
+      # release "0.1 0.3 0.4 0.3 0.2 "
+      # sustain "0.1 0.4 0.6 0.5 0.2"
+      # accelerate "1 2 0.3 0.4 0.5 0.2"
+      ,
+      whenmod 10 5(# freq "100 200 60 300") $
+      s "psin(<3 5 7 1>,8,<0 1 0>) "
+      # accelerate "1.2 2.1 3 2.5"
+      # release "0.1 0.2 0.3 0.1 0.2 "
+      # sustain "0.1 0.2 0.6 0.1 0.2"
+      -- # cut "6 7  1 4 "
+      ,
+      whenmod 8 5 (# freq "200 800 400 600 50 10") $
+      s "superfff(3,16) "
+      # sustain "1.1 0.4 0.6 1.5 0.2"
+      # up "2 7 -1 3 6 -1"
+      ]
+
+
+
+
+
+   d1 $
+      every 6 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.01 0.1"))) $
+      every 8 (# voice "1 2 3 4") $
+      whenmod 8 5 (fast 1.5) $
+      every 3 (# freq "100") $
+      every 4 (density 1.5) $
+      stack [
+        s "supergrind(3,8)"
+        # voice "2 7 -1 3 6 -1"
+        # rate "1 2 0.5 0.8"
+        # accelerate "0.5 1 0.05"
+        # freq "60 75 200 150"
+        # detune "0 -12"
+        # sustain "0.3 0.6 0.5 0.1"
+        # lpf (slow 8 $ range 1200 8000 tri)
+        # n "0 1 8 -8 5 6 4 4 2"
+        ,
+        s "pitchednoise(7,8)"
+        # bandwidth "1000 2000 500 6000"
+        # freq "200 500 600 2000"
+        # attack "0.01 0.05 0.1 0.08"
+        # sustain "0.2 0.3 0.1 0.4"
+        # decay "0.1 0.2 0.3 0.1"
+        ,
+        s "superrand(5,16)"
+        # n ( every 2 (0.25 <~) $ every 5 (density 4) $ every 3 (rev) $ "1 5 8 -12 0 12")
+        # freq "5 20 2 40 15"
+        # sustain "0.1 0.3 0.6 0.4"
+        # bpf (slow 12 $ range 400 9000 saw)
+        # bpq "0.1 0.05 0.15"
+      ]
+
+
+   d1 $
+      every 3 (# freq "100") $
+      stack [
+      every 6 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.01 0.1"))) $
+      every 4 ((zoom (0.25,0.75)).(# accelerate 1.5)) $
+      every 8 (# voice "4 0 1 2 1") $
+      whenmod 8 5 (density 1.5) $
+        stack [
+        s "superfork(3,8)"
+        # accelerate "0.5 1 0.05"
+        # freq "60 75 200 150"
+        # up "2 7 -1 3 6 -1"
+        # sustain "0.2 0.6 0.1"
+        # decay "0.3 0.3 0.2"
+        ,
+        s "superhat(9,16)"
+        # n "0 1 2 3"
+        # accelerate "0.5 0.1 0 0.3 0.5"
+        # sustain "0.1 0.2 0.5 0.1"
+        ,
+        s "pitchednoise(7,8)"
+        # bandwidth "1000 2000 500 6000"
+        # decay "0.1 0.2 0.3 0.1"
+        # freq "200 500 600 2000"
+        # attack "0.01 0.05 0.1 0.08"
+        # sustain "0.2 0.3 0.1 0.4"
+        ,
+        s "superrand(5,16) "
+        # n "0 1 2 4 2"
+        # freq "10 20 30 40"
+        # sustain  "0.3 0.6 0.1 0.2"
+        # bpf (slow 12 $ range 200 6000 saw)
+        # bpq "0.1 0.05 0.15"
+        # n (every 3 (0.25 <~) $ every 2 (0.25 <~) $ every 1 (density 4) $ every 3 (rev) $ "1 0 4 -8 12")]
+        ,
+        whenmod 5 3 (density (3/2)) $
+        whenmod 6 3 (# freq "600") $
+        whenmod 7 4 (# freq "250") $
+        whenmod 8 6 (density (3/2)) $
+        every 16 (chop 8) $
+        stack [
+        s " tk(<5 4>,8)"
+        -- # n 0
+        ,
+        s "ch(5,16)"
+        # n (every 2 (0.25 ~>) $ every 2 (0.25 ~>) $ "0 1 2 3")
+        ,
+        s "~ ai*2 "
+        # up "2 -1"
+        ]
+        ]
+
+
+hush
+
+do
+   d1 $
+      whenmod 6 3 (((# fshift "0.6 0.5") . (# fshiftnote "-2 -5 -6 -3 -1") . (# fshiftphase "2 0.1"))) $
+      every 8 (# accelerate "1 2 1.4") $
+      whenmod 8 5 (density 1.5) $
+      every 3 (# freq "100 60 200 350") $
+      every 4 (density 1.5) $
+      stack [
+      s "superfork(3,8,2)"
+      ,
+      s " superhat*2"
+      ,
+      s "super808*1"
+      ,
+      s "drum_kick(5,8,<7 12 0>) "
+      ]
+      # n (every 3 (0.25 <~) $ every 2 (0.25 <~) $ every 1 (density 4) $ every 3 (rev) $ "1 0 1 2")
+      # up "2 7 -1 3 6 -1"
+
+do
+   d1 $
+      every 6 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.01 0.1"))) $
+      every 8 (# voice "4") $
+      whenmod 8 5 (density 1.5) $
+      every 3 (# freq "100") $
+      every 4 (slow 1.5) $
+      s "superfork*2 superhat*8 cymbal808_ryan*1 superrand*2 "
+      # n (every 3 (0.25 <~) $ every 2 (0.25 <~) $ every 1 (density 4) $ every 3 (rev) $ "1 0 12")
+      # up "-1"
+
+do
+   d1 $
+      every 6 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.01 0.1"))) $
+      every 2 (# voice "1 1.5 1.5") $
+      whenmod 8 5 (density 1.5) $
+      whenmod 8 5 (spin 4) $
+      every 16 (|*| speed "-1") $
+      s "superfork*2 superhat*8 cymbal808_ryan*1 superrand*2 "
+      # n (every 3 (0.25 <~) $ every 2 (0.25 <~) $ every 1 (density 4) $ every 3 (rev) $ "1 0 12")
+      # up "-1"
+
+do
+   d1 $
+      every 6 (((# fshift "0.6 0.5") . (# fshiftnote "0.8 0.5 0.9 0.17 0.11") . (# fshiftphase "0.01 0.1"))) $
+      every 2 (# voice "1 1.5 1.5") $
+      whenmod 8 5 (density 1.5) $
+      whenmod 8 5 (spin 4) $
+      every 3 (0.25 <~) $
+      s "superfork*4 clap_oto309*2 cymbal808_ryan*1 oneclap_thor*8 "
+      # n (every 3 (0.25 <~) $ every 2 (0.25 <~) $ every 1 (density 4) $ every 3 (rev) $ "1 0 12")
+      # up "-1"
+
+do
+   d1 $
+      whenmod 7 5 (# decay "0.25 0.5 0.4") $
+      every 16 (# sustain "0.8 0.2 0.6") $
+      s "superfork*2 clap_oto309*1 kick_oto309*2 superfff*1 "
+      # n (every 1 (palindrome) $ "1 8 3 12 0 11 4 0")
+      # up "5 4 6 4 6 -1"
+
+do
+   d1 $
+      whenmod 6 4 (rot 2) $
+      every 4 (0.25 <~) $
+      whenmod 7 5 (0.5 <~) $
+      s "forest_bird_pj*2 super808*2 "
+      # n (every 3 (slow 4) $ "12 6 11 9 6 5 2 5")
+      # up "-4 6"
+
+do
+   d1 $
+      every 4 (# freq "150 600") $
+      whenmod 6 4 (rot 2) $
+      every 4 (0.25 <~) $
+      whenmod 7 5 (0.5 <~) $
+      s "harpsichord1*2  sos_bell*2 "
+      # freq ("2 3 2 10 5 2" * (segment 32 $ slow 8 $ range 40 80 tri))
+      # n (every 3 (slow 4) $ "12 6 11 9 6 5 2 5")
+      # up "3 5 1 2 5"
+
+do
+   d1 $
+      every 3 (# freq "150 600") $
+      whenmod 12 6 (0.25 <~) $
+      whenmod 7 5 (|*| freq "3 1.5") $
+      every 4 (spin 2) $
+      every 2 (|*| shape "0.3") $
+      s "handclapsmash*2 superhex*4 ~*2 ring1*4 "
+      # n (every 1 (slow 1.25) $ every 1 (slow 2) $ every 4 (rev) $ "0 1 2 4")
+      # up "3 7"
+
+do
+   d1 $
+      whenmod 8 6 (rot 4) $
+      whenmod 12 6 (0.25 <~) $
+      whenmod 7 5 (# pitch1 "3 -1.5") $
+      every 3 (0.5 ~>) $
+      every 3 (|*| shape "0.3") $
+      s "superf*1 superhex*4 waveguideFlute*1 ring2*4 "
+      # n (every 3 (density 1.25) $ every 4 (slow 1.5) $ "4 3 6 8")
+      # up "6 -2 7 4 4"
+
+do
+   d1 $
+      whenmod 12 6 (0.25 <~) $
+      every 3 (0.5 ~>) $
+      every 3 (|*| shape "0.3") $
+      s "superf*1 superhex*4 waveguideFlute*1 superrand*2 "
+      # n (every 3 (density 1.25) $ every 4 (slow 1.5) $ "4 3 6 8")
+      # up "6 -2 7 4 4"
+
+do
+   d1 $
+
+
+do
+   d1 $
+
+do
+   d1 $
+    stack [
+      whenmod 6 3 (# freq "600") $
+      every 8 (trunc (3/8)) $
+      every 16 (chop 8) $
+      s "~*2 gabor*2 superhat*2 sub*2 "
+      # n (every 3 (0.25 <~) $ every 1 (0.25 ~>) $ run 12)
+      # up "7 -2 5 3 3 8 2"
+      # cut "-1"
+      ,
+      every 4 (0.5 ~>) $
+      whenmod 8 5 (# freq "120 300 225") $
+      every 2 (density (4/3)) $
+      whenmod 8 5 (# speed "0.5") $
+      fix (# freq "120 360 50 140 260 480")(s "supercross") $
+      fix (# freq "200 120 100 100") (s "superhex") $
+      stack [
+        s " ~ snare_stein*1"
+        # gain 0.6
+        ,
+        s "supercross*4"
+        # pitch1 "1.1 0.5 0.8 0.9"
+        # pitch2 "0.5 0.1 0.2 0.6 0.1"
+        # voice ((slow 12 $ range 0.1 0.6 tri) + "0 1 0.5 0.2 0.7 0.6")
+        # lfo "0.01 0.05 0.2 0.3 0.06"
+        # accelerate "0.5 0.1 0.2 0.6"
+        # sustain "0.2 0.4 0.8 0.4 0.6 0.1"
+        # vcoegint "0.1 0.2 0.3 0.5 0.1"
+        # speed (slow 8 $ range 0.1 1.3 saw)
+        ,
+        s "superhex*<2 8> "
+        # n (every 4 (density 1.5) $ every 1 (density 4) $ "1 0 2 1 0")
+        # gain 0.55
+        ]
+      -- |+| freq "30 40 50 80"
+      # up "1 3"
+      ]
+
+do
+   d1 $
+
+
+   d1 $
+    stack [
+      whenmod 6 4 (# crush "11 14 15 12") $
+      whenmod 8 5 (# accelerate "0.9 0.1") $
+      every 8 (# freq "40 80 300") $
+      every 3 (slow (8/3)) $
+      stack [
+        foldEvery [7,9] (# s "~") $
+        every 2 (slow 2) $
+        s " plucking(5,16)"
+        # freq "40 200 300 120 40"
+        ,
+        whenmod 8 5 (# s "~") $
+        s "waveguideFlute*<1 2>"
+        # scl "0.2 0.5 0.1 0.7"
+        # ipress "0.88 0.87 0.9 0.81"
+        # ifeedbk1 "0.4 0.35 0.46"
+        # ifeedbk2 "0.46 0.23 0.32 0.43"
+        # dur "0.8 0.3 0.9"
+        # gain 0.85
+        -- # release "0.1 0.2 0.1 0.3"
+        -- # sustain "0.2 0.3 0.1 0.4"
+        ,
+        whenmod 8 5 (# s "~") $
+        s "superharm(7,16,7)"
+        # accelerate "0.1 0.3 0.1 0.8"
+        |+ n "1 2 3 8"
+        # freq "200 300 400 100 50"
+        # voice "0.1 0.5 1 2"
+        # lfo "0.1 0.7 0.9 1 0.3"
+        # pitch2 "1 2 0.5 0.9 1.4"
+        # detune "0 2 0 6 1 3"
+        # pitch1 "0.5 1.5 0.9 1.3"
+        # decay "0.2 0.9 0.4 0.1"
+      ]
+      # n (every 3 (rev) $ every 2 (0.25 ~>) $ every 4 (0.25 ~>) $ "1 2 3 4")
+      # up "7 1 8"
+      ,
+      whenmod 6 4 (# up "2 7") $
+      whenmod 6 4 (# up "-9") $
+      every 8 (# freq "100 120 200") $
+      whenmod 5 3 (# coarse "0 1 2 5") $
+      stack [
+      s "ek:1(10,16)"
+      # shape 0.3
+      ,
+      s "eh(<14 10>,16)"
+      # n (every 3 (density 3) $ "7 3 7")
+      ]
+      # up "7 1 8"
+    ]
+
+do
+   d1 $
+    stack [
+      every 4 (trunc (3/8)) $
+      every 8 (((# phasr "0.4 0.1 0.6" ) . (# phaserrate "0.2") . (# phaserdepth "0.7" ))) $
+      whenmod 5 2 (# decay "0.15") $
+      every 7 (stut' 5 (0.0625*3) (|+| speed "2.5")) $
+      s "tables*2 tc*2 sub*4 ef*2 "
+      # n (every 2 (slow 1.5) $ every 3 (density 3) $ "4 7 5 8 6")
+      # up "-3 1 -6"
+      # cut "-1"
+      ,
+      every 3 (# freq "240 60 180 75") $
+      every 5 (|*| speed "-1") $
+      whenmod 5 3 (# accelerate "2 -0.5") $
+      whenmod 5 2 (# voice "2.5 1") $
+      every 7 (((# ring "0.2 0.3 0.6") . (# ringf "10") . (# ringdf "5"))) $
+      every 2 (slow 2) $
+      s " superfff*8 supergong*4 cyclo*2 ~"
+      # n (every 4 (0.25 <~) $ "0 9 3 5 9 10 9 4 4 9 7")
+      # up "6 1 -6 -3 -4"
+      ]
+
+do
+   d1 $
+      every 8 (trunc (1/4)) $
+      whenmod 6 4 (0.25 ~>) $
+      whenmod 5 3 (|*| accelerate "2 -0.5") $
+      whenmod 5 2 (|*| voice "2.5 1") $
+      every 7 (((|*| ring "0.2 0.3 0.6") . (|*| ringf "10") . (|*| ringdf "5"))) $
+      s " superfff*8 supergong*4 clap_oto309*8 "
+      # n (every 3 (slow 4) $ every 2 (density 3) $ "5 9 10 10 5 3 9")
+      # up "6 1 2 2 -4"
+
+do
+   d1 $
+      whenmod 6 3 (|*| up "2 3 6 8 1") $
+      whenmod 8 5 (|*| voice "1") $
+      whenmod 12 6 (jux (rev)) $
+      s "spook2*4 spook*2 superrand*2 superhex*2 "
+      # n (every 2 (0.25 ~>) $ run 1)
+      # up "-2 3 -2 -4 7 -1 4 6 1"
+
+do
+   d1 $
+      every 4 (jux (rev)) $
+      whenmod 8 6 (stut' 2 (0.0625*3) (|*| speed "1.5")) $
+      whenmod 12 6 (((|*| ring "0.1 0.5 0.3") . (|*| ringf "50") . (|*| ringdf "12"))) $
+      every 10 (slow 2) $
+      s "spook2*2 superfff*2 superf*2 supercombo*2 "
+      # n (every 2 (palindrome) $ every 3 (0.25 <~) $ "5 12 9 6")
+      # up "7 2"
+
+do
+   d1 $
+      every 4 (jux (rev)) $
+      whenmod 8 6 (stut' 2 (0.0625*3) (|*| speed "1.5")) $
+      whenmod 12 6 (((|*| ring "0.1 0.5 0.3") . (|*| ringf "50") . (|*| ringdf "12"))) $
+      whenmod 5 2 (# coarse "6") $
+      every 10 (slow 2) $
+      s "superzzz*1 superfff*2 superf*2 supercombo*2 "
+      # n (every 4 (palindrome) $ every 1 (density 4) $ every 3 (slow 1.5) $ "0")
+      # up "1 -2 3 3"
+
+do
+   d1 $
+      whenmod 8 6 (stut' 2 (0.0625*3) (|*| speed "1.5")) $
+      every 8 (|*| voice "1.5") $
+      whenmod 12 6 (|*| speed "-1") $
+      every 10 (slow 2) $
+      s "superzzz*2 ring4*2 af*2 superstatic*2 "
+      # n (every 1 (slow 1.5) $ every 3 (slow 1.5) $ "11 12 0 12 10 5 6 10")
+      # up "2 3 6 -1 3"
+
+do
+   d1 $
+      whenmod 6 4 (trunc (3/8)) $
+      every 8 (|*| voice "1.5") $
+      whenmod 12 6 (|*| speed "-1") $
+      every 1 (|*| pitch1 "7.5") $
+      s "super808*2 ring4*2 superf*8 superstatic*2 "
+      # n (every 1 (slow 1.5) $ every 3 (slow 1.5) $ "11 12 0 12 10 5 6 10")
+      # up "2 3 6 -1 3"
+
+do
+   d1 $
+      whenmod 5 2 (rev) $
+      stack [
+        s "super808(<3 5 7>,8,<1 2 0>)"
+        ,
+        s "ai(5,8)"
+        # n (every 2 (palindrome) $ every 3 (slow 1.5) $ every 5 (rev) $ every 4 (palindrome) $ "4 11 8 0 8")
+        ,
+        s "ac(3,8)"
+        ,
+        whenmod 5 3 (|+| freq "100 150") $
+        s "synthdev4*8 "
+        # accelerate "0.5 0.1 0.5 4 0.3 1 0.2"
+        # sustain "0.1 0.8 0.1 0.9"
+        # decay "0.1 0.3 0.1 0.4"
+        # freq "400 200 500 100"
+        # gain 0.8
+      ]
+      # up "-1"
+
+do
+   d1 $
+      whenmod 7 4 (# freq "150") $
+      whenmod 6 3 (slow (4/3)) $
+      whenmod 5 3 (stut' 5 (0.0625*3) (|*| speed "1.5")) $
+      whenmod 8 5 (# freq "200") $
+      every 6 (rot 4) $
+      s "superhat*2 henonc*1 supergong*2 snare*1 "
+      # n (every 2 (palindrome) $ every 2 (rev) $ every 1 (slow 4) $ "4 1 10 10 6 6 5 0")
+      # up "5 1 5 -1 6"
+
+
+hush
+
+let art = pF "art"
+
+do
+   d3 $
+      every 10 ((# sustain "0.2 0.4 0.1").(# delay 0.9).(# delaytime 0.05).(# delayfeedback 0.7)) $
+      whenmod 6 3 (fast (4/3)) $
+      whenmod 5 3 (stut' 5 (0.0625*3) (|*| speed "1.5")) $
+      whenmod 8 5 (# freq "200") $
+      every 6 (rot 4) $
+      s "waveguideFlute(5,8) "
+      # freq "400 300 200 500 580"
+      # ipress "0.95 0.9 0.9 0.96 0.97 0.82 0.84 0.98"
+      # ibreath (slow 8 $ range 0.08 0.14 tri)
+      # ifeedbk1 (slow 12 $ range 0.32 0.46 tri)
+      # ifeedbk2 (slow 24 $ range 0.25 0.55 saw)
+      # vibGain "5.2 4.4 6.3"
+      # vibFreq "1.2 1.3 1.2 1"
+      # scl "0.3 0.3 0.5 0.6 0.1 0.3"
+      # n (every 4 (slow 1.5) $ every 3 (0.25 <~) $ "8 9 6")
+      # up "5 1 5 1 6"
+
+        -- # cut "3 4 -6"
+
+              -- # cut "3 4 -6"

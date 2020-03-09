@@ -1,0 +1,9 @@
+do
+   d1 $
+      every 4 (density (4/3)) $
+      every 4 (slow (8/3)) $
+      every 1 (0.5 ~>) $
+      every 1 (density (8/3)) $
+      slow 2 $ s "ugslam*8 v1*4 xcy*2 tempt*2 "
+      |+ n (every 1 (palindrome) $ "7 7 2")
+      |* cut "4 2 1 4"

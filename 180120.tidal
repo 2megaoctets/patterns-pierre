@@ -1,0 +1,22 @@
+do
+   d1 $
+      every 4 (chop 8) $
+      every 5 (|*| sustain "0.8 0.2") $
+      whenmod 6 3 (|*| pan "0") $
+      whenmod 5 2 (|*| freq "250") $
+      every 1 (|*| pan (tri)) $
+      s "pitchednoise*2 jilet*1 superf*2 superhat*8 "
+      |+ n (every 4 (0.25 ~>) $ "4 10 5 6 12 3 6 7 7 2 6 2 10 5 2 1 7 11 8 5")
+      |- up "8 -2 -1 -2 -1 -4 2 8 6"
+   d2 $
+      whenmod 7 5 (|*| begin "0.25 0.25") $
+      whenmod 7 5 (degrade) $
+      s "superbell*2 ring3*1 oneclap_thor*8 ring3*2 "
+      |- n (every 1 (rev) $ every 1 (rev) $ every 1 (0.25 ~>) $ run 12)
+      |+ up "7 1"
+   d3 $
+      whenmod 8 5 (|*| sustain "0.4") $
+      every 8 (|*| freq "600") $
+      s "supersnare*1  snare_stein*4 superphase*4 "
+      |+ n (every 3 (0.25 ~>) $ every 4 (0.25 ~>) $ "7 8 10 7")
+      |- up "2 7 7 8 7 -2 2"

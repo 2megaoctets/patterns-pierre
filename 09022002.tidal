@@ -1,0 +1,54 @@
+d1 $
+  seqPLoop [
+   (0,31, every 4 (linger 0.5) $
+       stack [
+       whenmod 4 2((|*| fshift "0.1").(# fshiftnote "<-2 -7 ><1 2 0.5>").(# fshiftphase "0.1 0.02 0.05 0.03")) $
+       every 2 ((# ring "0.1 0.3 0.2").(# ringf "8 4 10 5 10").(# ringdf "0.1 0.3 0.5")) $
+       s "fi:3(<5 6 5>,16)"
+       |+ up (every 2 (rev) $ every 2 (palindrome) $ every 3 (slow 2) $ "6 5 1 2 -7")
+       # release "1 0.02 0.8 0.2 0.3 0.05 0.01"
+       # decay "0.1 0.02 0.8 1"
+       # gain 0.7
+       ,
+       s "ck(<3 6 7 2>,8) ~?"
+       # up 0
+       ,
+       every 2 (# ts "0 1 0.6 0.1 0.1 1 0") $
+       s "cp:6(<4 11>,16,<8 24 18>)"
+       # cut 1
+       # ts 0
+       ,
+       s "tc:8(<5 11 13 7>,16) "
+       # up "7 12 15 7"
+       # begin "0.01 0.1 0.15"
+       # end "0.3 0.33 0.35 0.2 0.25"
+     ]
+   |+ up "8 2 -4"
+   # cut "-1 2 4"
+   )
+   ,
+   (32,127,
+     every 4 (linger 0.5) $
+       stack [
+       every 2 ((# ring "0.7 0.2").(# ringf "20 4 10 5 10").(# ringdf "0.1 0.3 0.5")) $
+       whenmod 4 2((|*| fshift "0.6").(# fshiftnote "<-2 -7 ><1 2 0.5>").(# fshiftphase "0.1 0.2 0.5 0.3")) $
+       s "fi(<5 6 5>,16)"
+       |+| up (every 2 (rev) $ every 2 (palindrome) $ every 3 (slow 2) $ "6")
+       # gain 0.7
+       ,
+       s "cp:6(11,16)"
+       ,
+       every 4 (0.25 <~) $
+       s "ck(<3 7 5>,8)"
+       # up 0
+       ,
+       every 3 (soak 4 (hurry 2)) $
+       s "tc:8(<7 11 15 9>,16) "
+       # up "7 12 15 7"
+       # begin "0.01 0.1 0.15"
+       # end "0.3 0.33 0.35 0.2 0.25"
+       ]
+     |+ up "8 2 -4"
+     # cut "-1"
+   )
+   ]

@@ -1,0 +1,8 @@
+do
+   d1 $
+      every 3 (|*| coarse "2 4 6 6") $
+      whenmod 7 4 (0.125 <~) $
+      whenmod 7 4 (density 1.5) $
+      slow 2 $ s "superkick*2 superhex*1 superwavemechanics*2 supergrind*8 "
+      |+| n (every 1 (0.25 <~) $ run 7)
+      |+| cut "2 3 1"

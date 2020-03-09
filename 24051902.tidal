@@ -1,0 +1,117 @@
+do
+   d1 $
+    stack [
+      whenmod 16 13 (# s "~") $
+      whenmod 8 6 ((every 2 (# accelerate "{0.1 -0.3 0.6 1.5 -2 0}%5")).(|+ speed "<1 0.75 0.5>").(linger "<0.25 0.5 0.33>")) $
+      whenmod 6 3 (jux (rev).(every 4 (|* speed "-1"))) $
+      every 4 (0.25 <~) $
+      every 2 (slow 2) $
+      s "[ak [~ sd*<2 1> ] xcp*<4 8 2> r0*<8 0 1> , foleyperc*<4 2 1 0>, ch*{8 16 4 8 16 8}%4 ] "
+      # speed 1
+      # n (every 4 (|+ "<1 2 3>") $ every 3 (slow 2) $ every 4 (0.25 ~>) $ run 2)
+      # cut "-1 -2"
+      ,
+      whenmod 8 7 (# s "~") $
+      interlace (every 2 (density 2) $ s "ck:2 _ _ ~")(s "ck:2(<3 5 1>,8,<0 2>)")
+      # distort (segment 64 $ slow 16 $ range 0.01 0.3 tri)
+      # shape 0.4
+      # lpf (slow 12 $ range 2800 4200 cosine)
+      # lpq (segment 32 $ range 0.05 0.13 saw)
+      # gain 0.9
+      # cut 1
+      ,
+      whenmod 15 4 ((# ring (slow 8 $ range 0.1 0.7 tri)).(# ringf (slow 6 $ range 6 80 saw)).(# ringdf (slow 10 $ range 0.2 0.8 cosine))) $
+      whenmod 8 6 (# s "~") $
+      whenmod 7 5 (# binshift (slow 3 $ range 0.2 7.8 sine)) $
+      every 2 ((# delay 0.7).(# delayfb 0.7).(# delayt "<0.01 0.05 0.1 0.2>").(# scram ( slow 2 $ range 0.12 1.8 tri))) $
+      s "supervibe(<3 5 3>,8,<2 0>)"
+      # voice (slow 2 $ range 0 1 tri)
+      # accelerate (slow 8 $ range "-1" 2 sine)
+      # detune (slow 16 $ range "-2" 8 saw)
+      # slide (every 3 (density 2) $ every 1 (|* "<0.5 0.25 -0.7>*3") $ "{2 4 2 8 9 1 2 5 4 1 4 1 2}%5")
+      # octave 3
+      # note (every 2 (|*| 0.5) $ "-8 -12 -5 2 3 4")
+      # sus "<0.5 0.1 0.6 0.5 0.4 0.8 0.1 0.09>"
+      |+ rel "<0.1 0.4 0.7 0.6 0.8 0.1 0.2 0>"
+      # rel "<0.25 0.5>"
+      # ring 0
+      -- # smear (slow 32 $ range 1.12 5.25 tri)
+    ]
+    # ring 0
+    -- # binshift 0
+
+
+hush
+
+import Sound.Tidal.Context
+import Sound.Tidal.Bjorklund
+import Sound.Tidal.Utils
+import Sound.Tidal.Chords
+import Sound.Tidal.UI
+
+whenmodr :: [Pattern Time] -> [Int] -> [Int] -> (Pattern a -> Pattern a) -> Pattern a -> Pattern a
+whenmodr speeds numerators denominators modifier pattern
+    | done = modifiedpattern
+    | otherwise =  whenmodr rests restn restd modifier modifiedpattern
+    where modifiedpattern = outside speed (whenmod numerator denominator (modifier)) $ pattern
+          numerator = (head numerators)
+          denominator = (head denominators)
+          speed = (head speeds)
+          done = (null $ tail speeds) && (null $ tail numerators) && (null $ tail denominators)
+          restn = if null (tail numerators) then [numerator] else (tail numerators)
+          restd = if null (tail denominators) then [denominator] else (tail denominators)
+          rests = if null (tail speeds) then [speed] else (tail speeds)
+efx :: Int -> Int -> Pattern Time -> (Pattern a -> Pattern a) -> (Pattern a -> Pattern a) -> Pattern a -> Pattern a
+efx n d r e e' p = fast r $ ifp (\x -> (bjorklund (n,d))!!!x) ((slow r).(e)) ((slow r).(e')) $ p
+epat :: Int -> Int -> Pattern Time -> Pattern ControlMap -> Pattern ControlMap -> Pattern ControlMap
+epat n d r p p' = fast r $ ifp (\x -> (bjorklund (n,d))!!!x) (const $ slow r $ p) (const $ slow r $ p') $ s ""
+
+let a = [note (slow 2 $ scale "hexSus" $ "1 2 . 3 4 5" + "<0 1 -2 3>" + "<0 1 2>") # s "win:5" , note (scale "hexSus" $ "3 -8 3 . 4 2" - "<1 -2 3>" - "<2 3 -1>") # s "basss:4", note (scale "hexSus" $ "4 . 3 9" + "<4 2 3>" + "<3 2>") # s "bbss:2" ]
+
+d1 $
+  -- every 2 (rot "<1 2 4>").(brak).(chunk 4 (spin "<1 2 4>")) $
+  ghost $
+  stack [
+    -- -- every 4 ((# s "~").(every  2 (slow 2))) $
+    -- -- slow "<32 16>" $
+    -- -- density "0.5 1 0.25 1" $
+    -- -- squeeze (fmap ([0,1,2]!!) $
+    -- -- markovPat 64 0 [[0.3, 0.4, 0.3], [0.3, 0, 0.7], [0.7, 0.3, 0]]) a
+    -- -- # cut "1 -1"
+    -- -- |- up 8
+    -- -- ,
+    -- whenmod 16 13 (# s "~") $
+    -- seqPLoop  [
+    --   (0,31,epat 3 16 8 (s "ak(5,8,<0 1>)") (epat 3 8 4 (s "grprc(15,16)" # rel "0.2")(s "as:1(3,8)"))
+    --   # up "0 2"
+    --   )
+    --   -- ,
+    --   -- (32,63, epat 3 16 8 (s "[ak,bk](5,8,<0 1>)") (epat 3 8 4 (s "grprc:0(15,16)" # rel "0.5 0.7 0.2")(s "[as:1,grsn:0](3,8)"))
+    --   -- # up "0 2"
+    --   -- )
+    --   -- ,
+    --   -- (64,127,
+    --   -- whenmodr [0.5,2,1] [2] [1] (efx 5 13 4 ((* coarse 3).(* release 0.5)) ((stut 4 0.5 ("<1 4 2 16 8 4>*0.75"/64)).(+ hcutoff 80))) $
+    --   -- epat 3 16 8 (s "[ak,bk](5,8,<0 1>)") (epat 3 8 4 (s "grprc:0(15,16)" # rel "0.5 0.7 0.2")(s "[as:1,grsn:0](3,8)"))
+    --   -- # up "0 2"
+    --   -- )
+    -- ]
+    -- ,
+    whenmod 15 12 (# s "~") $
+    every 8 (# s "~") $
+    every 2 (slow 2) $
+    every 4 (0.25 <~) $
+    efx 3 8 "<1 2 4>" (stutWith 3 (1/8)(|+ up "2")) (jux (slow 2).(# gain 0.5).(|+ up "2 5 8")) $ s "ah(<5 8 7 6>,8,<0 2>)" # up "0.4 -1"
+    ,
+    whenmod 7 4 (|+ speed "0.5") $
+    whenmod 5 3 (palindrome) $
+    whenmod 6 3 (rev) $
+    whenmod 7 4 (density 4) $
+    every 2 (slow 4) $
+    -- slow 2 $
+    s "808*8 impacts*2 tn*4 win*8 "
+    |+ n (every 3 (palindrome) $ every 4 (slow 1.5) $ run 9)
+    |+ cut "1 2 3 2 4"
+  ]
+
+d2 $ silence

@@ -1,0 +1,9 @@
+do
+   d1 $
+      every 1 (|+ accelerate "1") $
+      whenmod 6 4 (0.125 ~>) $
+      every 6 ((slow 16 . striate 4)) $
+      every 2 (slow 2) $
+      slow 2 $ s "strings*8 bf*2 sfx*2 d*4 "
+      |+ n (every 1 (slow 1.5) $ "0 2 9 11 0")
+      |* cut "-1"

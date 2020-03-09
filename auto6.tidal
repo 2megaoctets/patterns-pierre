@@ -1,0 +1,10 @@
+do
+   d1 $
+      whenmod 6 4 (spin 4) $
+      every 6 (linger 0.5) $
+      whenmod 8 5 (density 2) $
+      every 16 (((|*| octer "0.4 0.6") . (|*| octersub "0.8") . (|*| octersubsub "0.01"))) $
+      every 3 (linger 0.25) $
+      s "cymbal808_ryan*4 super4*8 jilet*4 superphase*8 "
+      |- n (every 3 (0.25 <~) $ run 5)
+      |+ up "3 7 2 -2 2 -2"

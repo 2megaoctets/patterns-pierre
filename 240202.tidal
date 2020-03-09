@@ -1,0 +1,393 @@
+-- ici ça grouve en 9
+
+d4 $
+   fix ((whenmod 30 3 (# s "~")).(# fshift "0.7 0.8 0.2 0.8").(# fshiftnote "0.2 0.3 1 2").(# fshiftphase "0.01 0.3 0.4").(# ring "0.3 0.8").(# ringf "4 40 20 6").(# ringdf "0.5 1 0.4").(# octer "0.3 0.08").(# octersub "0.1 1 2 0.1 0").(# hpf "320 400 700 ").(# freq "120 130 270 380 100 ")) (s "tv") $
+    seqPLoop [
+      (0,15, every 5 (((# delay "0.5 0.3") . (# delaytime "0.12 0.01") . (# delayfeedback "0.8"))) $
+      whenmod 12 6 (0.33 ~>) $
+      stack [
+      every 4 (0.33 <~) $
+      s "super808(<5 7 5>,9)"
+      # n "0 1"
+      # sustain "0.8 0.3 0.9"
+      # pitch1 "0.05 0.4 0.2"
+      # decay "0.4 0.7 0.3 0.9 1"
+      # accelerate "0 0.3 0.4 0.7 1 -0.3 0.25 0"
+      ,
+      slow 2 $
+      every 3 (rot 2) $
+      s "bin:4({6 7 10 5.6}%6,18,15)"
+      # hpf "300 200"
+      # hpq "0.1 0.2 0.1"
+      # bpf "4000 7000 9000"
+      # bpq "0.1 0.3 0.1 0.5"
+      # vowel "a [e o] <i u> ~"
+      -- # sustain "0.1 0 1 0"
+      # tremdp "0.7"
+      # tremr "0.05"
+      |+ up "-1 8 4 -2 -4"
+      ,
+      -- ,
+      s "~ dt:5(<3 7>,9,12) "
+      |- n (every 2 (density 1.25) $ run 3)
+      # sustain "0.01 0.3 0.2 0.1"
+      ]
+      )
+      ,
+      (16,31,
+        every 4 (0.33 <~) $
+        every 5 (((# delay "0.5 0.7") . (# delaytime "0.2 0.02") . (# delayfeedback "0.8"))) $
+      stack [
+      whenmod 12 6 (0.33 ~>) $
+      s "super808(<5 5 7.5 3.5 7>,9)"
+      # n "0 1"
+      # sustain "0.8 0.3 0.9"
+      # pitch1 "0.05 0.4 0.2"
+      # decay "0.4 0.7 0.3 0.9 1"
+      # accelerate "0 0.3 0.4 0.7 1 -0.3 0.25 0"
+      ,
+      s "superfork(<3 7>,<9 18>,2)"
+      # accelerate "0.1 0.3 0.4 -1"
+      # sustain "0.1 0.4 0.5 0.01"
+      # freq "50 80 10 100"
+      ,
+      s "tv(2,9,5)"
+      |- up "-1 8 4 -2 -4"
+      |*| freq 0.6
+      ,
+      s "~ dt:5(<3 7>,9,12) "
+      |- n (every 1 (density 1.25) $ run 2)
+      # sustain "0.01 0.3 0.6 0.1"
+      ]
+      )
+    ]
+    # orbit 0
+    -- # cps 0.8
+    -- |-| cut "-1 -3 -4"
+
+-- fait décrocher jack mais je sais pas où !!! edit 00:17 non c'est bon
+d3 $
+   foldEvery [3,8] (slow 3 . striate' "<4 8 16>" (1/16)) $
+   -- every 7 (spin 2) $
+   slow 2 $
+   whenmod 5 3 (((# phasr "0.3 0.5" ) . (# phaserdepth "0.9 0.95 0.9" ))) $
+      seqPLoop [
+      (0,7,
+      whenmod 6 4 (linger 0.33) $
+      stack [
+      s "moto:3(<4 13 7>,<9 18>)"
+      ,
+      s "sub:1(<5 1 3>,9,<12 15 27>)"
+      ,
+      s "31:2(<3 6 4 5>,9,<10 6 4 3>)"
+      ,
+      slow 2 $
+      s "~ bros(3,9,5) ~ "
+      ]
+      |+ n (every 1 (0.25 <~) $ every 4 (palindrome) $ "3 5 6 8 11 0 0 0 6")
+      |+ up "6 3" )
+      ,
+      (8,23,
+        every 6 (spin 2) $
+      whenmod 6 3 (((# delay "0.5 0.75") . (# delaytime "0.1 0.01") . (# delayfeedback "0.6"))) $
+      stack [
+      s "clic:3(<4 13 7>,<9 18>)"
+      ,
+      s "sub:1(<5 1 3>,9,<12 15 27>)"
+      ,
+      s "31:2(<3 6 4 5>,9,<10 6 4 3>)"
+      ,
+      slow 2 $
+      s "~ bros(3,9,5) ~ "
+      ]
+      |- n (every 1 (rev) $ every 3 (0.33 <~) $ run 4)
+      |+ up "-2" )
+      ,
+      (24,31,
+        -- whenmod 7 4 (spin 4) $
+        every 6 (rot 2) $
+      whenmod 6 4 (linger 0.33) $
+      whenmod 5 3 (((# delay "0.5 0.5") . (# delaytime "0.1 0.01") . (# delayfeedback "0.6"))) $
+      stack [
+      s "clic:3(<4 13 7>,<9 18>)"
+      ,
+      s "sub:1(<5 1 3>,9,<12 15 27>)"
+      ,
+      s "31:2(<3 6 4 5>,9,<10 6 4 3>)"
+      ,
+      slow 2 $
+      s "~ bros(3,9,5) ~ "
+      ]
+      |- n (every 1 (rev) $ every 3 (0.25 <~) $ run 4)
+      |+ up "-2" )
+      ,
+      (31,63,
+      whenmod 5 3 (((# phasr "0.3 0.5" ) . (# phaserdepth "0.9 0.95 0.9" ))) $
+      every 2 (linger 0.33) $
+      stack [
+      s "notif:3(<4 13 7>,<9 18>)"
+      |+ n (every 3 (0.33 <~) $ every 4 (palindrome) $ "3 5 6 8 11 0 0 0 6")
+      ,
+      s "sub:1(<5 1 3>,9,<12 15 27>)"
+      ,
+      s "31:2(<3 6 4 5>,9,<10 6 4 3>)"
+      ,
+      slow 2 $
+      s "~ bros(3,9,5) ~ "
+      ]
+      |+ up "6 3")
+    ]
+    # cut "-1 -3 -4"
+
+d1 $
+   stack [
+    every 5 (iter 3) $
+    every 6 (spin 2) $
+    whenmod 6 4 (linger 0.33) $
+    whenmod 7 4 (spin 2) $
+    s "tk:1(<4 5 6>,9,<12 25 5>)"
+    ,
+    every 4 (# attack "0.4 0.5") $
+    every 3 (slow 3 . striate "<8 32 16>") $
+    seqPLoop [
+      (0,16, every 16 (|+| coarse "2 4 32 6 16") $
+      whenmod 8 5 (# accelerate "-0.5 0.5 -0.25") $
+      stack [
+        s "hats(4,9)"
+        ,
+        s "ci:1(<1 2 5>,<9 18>,25)"
+        # hpf 300
+        ,
+        every 4 ((slow 2). (# s "~")) $
+        s "dp(3,9,14)"
+        ,
+        s "ah(5,9,<0 15 12>) "
+      ]
+      |+ n (every 2 (slow 3) $ "3 0 12 11 9")
+      |- up "5 6" )
+      -- ,
+      -- (17, 30, whenmod 8 5 (# accelerate "-0.5 0.5 -0.25") $
+      -- stack [
+      --   whenmod 4 2 (spread ($)[linger 2, zoom (0.25,0.75), iter 2, spin 2, (|* speed "-1 -0.5"),((slow 2).(# s "~"))]) $
+      --   s "hats(4,9)"
+      --   ,
+      --   every 5 (iter 3) $
+      --   loopAt 2 $
+      --   s "ci(7,18,21)"
+      --   # hpf 700
+      --   ,
+      --   every 4 ((slow 2). (# s "~")) $
+      --   s "dp(2,9,15)"
+      --   ,
+      --   s "ah(5,9,<0 15 12>) "
+      -- ]
+      -- |+ n (every 4 (rev) $ "5 5 11 6")
+      -- |- up "5 6" )
+      -- ,
+      -- (31, 47, every 4 (# attack "0.4 0.5") $
+      -- every 2 (density (3/2)) $
+      -- whenmod 8 5 (|+| coarse "16") $
+      -- stack [
+      --   whenmod 4 2 (spread ($)[linger 2, zoom (0.25,0.75), iter 2, spin 2, (|* speed "-1 -0.5"),((slow 2).(# s "~"))]) $
+      --   s "hats(4,9)"
+      --   ,
+      --   s "ch(6,<9 18>,24)"
+      --   # decay "0.01 0.02 0.015 0.3 0.1"
+      --   # sustain "0.01 0.05 0.001 0.1"
+      --   # release "0.1 0.2 0.05 0.1"
+      --   ,
+      --   every 4 ((slow 2). (# s "~")) $
+      --   every 2 (slow 2) $
+      --   s "dp(6,18,24)"
+      --   ,
+      --   s "ah(5,9,<0 15 12>) "
+      -- ]
+      -- |+ n (every 4 (rev) $ "5 5 11 6")
+      -- |- up "-1" )
+      -- ,
+      -- (48, 64, every 4 (# attack "0.4 0.5") $
+      -- every 3 (spin 3) $
+      -- every 2 (density (3/2)) $
+      -- whenmod 8 5 (# coarse "16") $
+      -- stack [
+      --   s "bp(4,9)"
+      --   ,
+      --   whenmod 4 2 (spread ($)[linger 2, zoom (0.25,0.75), iter 2, spin 2, (|* speed "-1 -0.5"),((slow 2).(# s "~"))]) $
+      --   s "ch:3(5,9,<0 15 12>)"
+      --   # decay "0.01 0.02 0.015 0.3 0.1"
+      --   # sustain "0.01 0.05 0.001 0.1"
+      --   # release "0.1 0.2 0.05 0.1"
+      --   ,
+      --   every 4 ((slow 2). (# s "~")) $
+      --   s "dp(6,<9 18>,2)"
+      --   ,
+      --   every 2 ((# accelerate "-1").(|* speed 0.5)) $
+      --   s "foleyperc(<5 2.5>,<9 18>)"
+      -- ]
+      -- |+ n (every 4 (rev) $ "5 5 11 6")
+      -- |- up "-1" )
+      -- ,
+      -- (65, 85, every 4 (# attack "0.25 0.5 0.15") $
+      -- every 10 (spin 4) $
+      -- every 7 (0.33 ~>) $
+      -- stack [
+      --   s "bp(4,9)"
+      --   ,
+      --   every 3 (loopAt 2) $
+      --   s "jungbass(1,9,15)"
+      --   # hpf 65
+      --   # lpf 500
+      --   ,
+      --   whenmod 8 6 (((# delay "0.1") . (# delaytime "0.001") . (# delayfeedback "0.3 0.3 0.3 0.3 0.5 0.8 0.2 0.9 0.5"))) $
+      --   s "notif(2,9,23)"
+      --   # decay "0.01 0.02 0.015 0.3 0.1"
+      --   # sustain "0.01 0.05 0.001 0.1"
+      --   # release "0.1 0.2 0.05 0.1"
+      --   ,
+      --   whenmod 4 2 (spread ($)[linger 2, zoom (0.33,0.66), iter 3, spin 3, (|* speed "-1 -0.5"),((slow 2).(# s "~"))]) $
+      --   s "foleyperc(5,9,<0 15 12>) "
+      -- ]
+      -- # n (every 4 (palindrome) $ "8 5 0")
+      -- |- up "-2 1" )
+    ]
+    # cut "-1"
+  ]
+
+d3 $
+fix ((# lpf 8000).(# gain 0.9))(s "tables") $
+  seqPLoop [
+      (0,8, whenmod 5 2 (|+| sustain "0.1 0.3 0.2") $
+      whenmod 7 4 (jux (|* speed "-1 0.75")) $
+      whenmod 16 3 (((# ring "0.1 04 0.7") . (# ringf "25 55 60 40") . (# ringdf "12 5 5"))) $
+      every 7 (# coarse "4 5 3..5") $
+      stack [
+        s "tables(2,18,21)"
+        ,
+        s "bt(<2 5>,9,3)"
+        ,
+        s "bh(<3 6 12>,<9 18>)"
+        ,
+        s "pp(2,9) "
+      ]
+      |- n (every 4 (rev) $ run 3)
+      |+ up "5 5")
+      ,
+      (9,15,whenmod 5 2 (|+| sustain "0.1 0.3 0.2") $
+      whenmod 7 4 (jux ((zoom (0.25,0.75)).(rot "<1 3 2>"))) $
+      every 16 (((# ring "0.1") . (# ringf "25 55 60 40") . (# ringdf "12 5 5"))) $
+      every 7 (# coarse "4 5 3..5") $
+      stack [
+        s "supergong(2,9,18)"
+        ,
+        s "bt(<2 4 5 4 2>,9,<3 6>)"
+        ,
+        s "bh(<6 8 5>,9,12)"
+        ,
+        s "pp(2,9,12) "
+      ]
+      |- n (every 4 (rev) $ run 3)
+      |+ up "5 5")
+      ,
+      (16,31, whenmod 5 2 (# sustain "0.1 0.3 0.2") $
+      whenmod 7 4 (jux (within (0,0.5)(chunk 4 (hurry 2)))) $
+      every 16 (((# ring "0.1") . (# ringf "25 55 60 40") . (# ringdf "12 5 5"))) $
+      every 7 (# coarse "4 5 3 5") $
+      stack [
+        s "supergong(2,9,<18 5>)"
+        - up "10 8 5 4"
+        ,
+        s "bt(5,9)"
+        ,
+        s "~ handclapsmash2(<1 3 5>,9,3)"
+        ,
+        s "pp:3(<2 4>,9,<12 15>) "
+      ]
+      |+ n (every 5 (0.25 <~) $ "7 1 0 5")
+      |+ up "5 5")
+      ,
+      (32,47, whenmod 12 6 (# accelerate "1.2 0.5 2 2") $
+      every 4 (# freq "150") $
+      stack [
+        s "supergong(6,9,18)"
+        ,
+        every 2 (# sustain "0.08 0.06 0.08") $
+        s "~ ugcrash(<1 2>,9,<3 6>) ~"
+        * sustain 0.05
+        ,
+        s "~ handclapsmash2(<1 5 3>,9)"
+        ,
+        s "pm(<2 3>,<9 18>) "
+      ]
+      -- |- n (every 4 (0.25 <~) $ every 4 (slow 1.25) $ every 1 (0.25 <~) $ every 4 (palindrome) $ run 3)
+      |+ up "2 8 -1 2")
+      ,
+      (48,64, whenmod 5 3 (iter 2) $
+      whenmod 16 3 (# coarse "5") $
+      whenmod 16 4 (((# ring "0.1") . (# ringf "25 55 60 40") . (# ringdf "12 5 5"))) $
+      every 10 (# freq "600") $
+      stack [
+        s "tables(2,18,21)"
+        * cut 2
+        ,
+        whenmod 5 2 (# sustain "0.1 0.3 0.2") $
+        s "bt:3(<3 5 9>,<9 18>)"
+        ,
+        s "bh:3(<6 9 12 5>,9)"
+        ,
+        s "pp:5(<2 3 4>,9,<3 6>) "
+      ]
+      |- n (every 4 (rev) $ run 3)
+      |+ up "5 5")
+    ]
+    # cut "-1 <-2 -20 -1>"
+    -- # legato 0
+
+d1 $
+   whenmod 5 2 (|+| speed "0.5") $
+   whenmod 5 3 (|+| shape "0.4") $
+   -- fix (ghost) (s "dk") $
+    stack [
+   slow 2  $
+     s "ai(4,6,2)  ~ jpnperc(<2 4 3>,6,<5 7>)"
+     # hpf 1200
+     ,
+     s "dk:8(<3 6 5>,9,4)"
+     # shape 0.3
+     ]
+   -- |+ n (every 3 (0.25 ~>) $ every 2 (rev) $ every 3 (slow 1.5) $ every 1 (palindrome) $ "6 11 2 9 0 1 6")
+   # cut "-3"
+
+d3 $
+   whenmod 5 2 (0.33 <~) $
+   fix (# n "<0 1 0.2 0.1 0.3 0.6>") (s "supernoise") $
+   every 2 (|+| coarse "3 2 1 2 3 2 2") $
+   stack  [
+   slow 2 $
+   -- whenmod 7 5 (chunk 4 (spin "<2 4>")) $
+   s "supernoise(<1 4 7 1 7>,9,<1 4>)"
+   # cut "-1"
+   # decay "0.1 0.2 0.3 0.2"
+   # sustain "0.1 0.15 0.2 0.02"
+   # attack "0.01 0.05  0.06"
+   ,
+   whenmod 6 3 (0.33 ~>) $
+   loopAt 2 $
+   s "~ el:2(2,6,2) ~"
+   # cut "-1"
+   # hpf 3500
+   # attack "<0.1 0.3 0.5>"
+   # decay "<0.1 0.3 0.5>"
+   ,
+   s "broh(4,9,11)"
+   # decay "0.1 0.2"
+   # sustain "0.1 0.05 0.02"
+   # attack "0.01 0.05 0.06"
+   ,
+   s "foleyperc:2(<1 2>,9) "
+   # attack "<0.1 0.2>"
+   # decay "<0.1 0.2 0.3>"
+   ]
+   + n ( every 2 (palindrome) $ run 5)
+   -- |+| cut "3 4 -1 4 -1 4 3 -1"
+
+d4 $ silence
