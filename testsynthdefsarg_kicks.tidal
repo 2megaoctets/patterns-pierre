@@ -192,7 +192,7 @@ d1 $ s "kickmedSd*4"
   # env0L4 1.0
   # atkEnv0 0.01
   # decEnv0 0.2
-  # relEnv0 0.26
+  # rlsEnv0 0.26
   # fratio 1.5
   # env1L1 120.0
   # env1L2 30.0
@@ -312,11 +312,11 @@ d1 $ s "drumkickSd*4"
   # amp 0.5
   # curve 8.0
   # attSinFreq 0.0001
-  # relSinFreq 1.5
+  # rlsSinFreq 1.5
   # curveSinFreq "-200.0"
   # levSin 1.0
   # attBpfFreq 0.001
-  # relBpfFreq 0.3
+  # rlsBpfFreq 0.3
   # timeScaleBpf 1.5
   # curveBpf "-200.0"
   # levBpf 1.0
@@ -364,7 +364,7 @@ d1 $ s "kicklaserbeamSd*4"
 
 d1 $ s "tweetBassLeakSd*4"
   # amp 0.78
-  # dec 0.9
+  # dcy 0.9
   # rq 0.2
 
 d1 $ s "tweetKickIntSd*4"
@@ -454,16 +454,16 @@ d1 $ s "kickBlocksSd*4"
   # t1freq 400.0
   # t1harmonic 2.0
   # t1glide 0.01
-  # t1att 0.0005
-  # t1rel 0.01
+  # t1atk 0.0005
+  # t1rls 0.01
   # t1curve "-4.0"
   # t1del 0.0
   # t1amp 1.0
   # t2freq 50.0
   # t2harmonic 3.44
   # t2glide 0.01
-  # t2att 0.0001
-  # t2rel 0.3
+  # t2atk 0.0001
+  # t2rls 0.3
   # t2curve "-4.0"
   # t2del 0.005
   # t2amp 1.0
@@ -471,16 +471,16 @@ d1 $ s "kickBlocksSd*4"
   # h1harmonic 8.0
   # h1glide 0.01
   # h1rq 0.6
-  # h1att 0.001
-  # h1rel 0.02
+  # h1atk 0.001
+  # h1rls 0.02
   # h1curve "-4.0"
   # h1del 0.001
   # h1amp 1.0
   # h2freq 1320.0
   # h2harmonic 1.0
   # h2glide 0.0
-  # h2att 0.003
-  # h2rel 0.03
+  # h1atk 0.003
+  # h2rls 0.03
   # h2curve "-4.0"
   # h2del 0.0
   # h2amp 0.5
@@ -592,7 +592,7 @@ d1 $ s "kick_electroSd*4"
 
 d1 $ s "kik3BrSd*4"
   # amp 1.0
-  # dec 0.1
+  # dcy 0.1
   # decaylevel 0.8
   # envCurve "-4.0"
   # sweeptime 0.08
