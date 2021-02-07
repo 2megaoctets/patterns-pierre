@@ -1,6 +1,8 @@
 resetCycles
 
 
+
+ -- done 0702
 -- en 10
 d1 $
 someCyclesBy 0.12
@@ -13,7 +15,6 @@ stack [
   listen 1 $
   someCyclesBy 0.18 (degradeBy "0.3 0.6 0.21") $
   struct  ("t(<3 5 7>, 10, <1 2>)") $ s "IkedaBassSusSd"
-    # gain 1.05
     # sustain 1.2
     # decay 0.2
     # attack 0.02 -- "0.02 0.01 0.017"
@@ -30,7 +31,7 @@ stack [
     # sweep2 "{340.0 {80 200 280}%2}%3"
     # vol1 2.0
     # vol2 (slow 7 $ segment 16 $ range 0.05 0.2 saw)
-    # amp 1
+    # amp 1.1
     # lpf 8000
     # hpf 55
   ,
@@ -38,16 +39,16 @@ stack [
   degradeBy "0.2 0.35" $
   struct  ("f(<3 5 7>, 10, <1 2>)") $ s "drumkickSusSd"
     # attack 0.0001
-    # sustain 0.9
-    # release 0.12
-    # amp 0.5
-    # atk 0.0001
-    # rls 0.09
+    # sustain 1.9
+    # release 0.32
+    # amp 0.4
+    -- # atk 0.0001
+    -- # rls 0.09
     # curve "8.0 -2 9"
     # attSinFreq "0.0001 0.002 0.003"
-    # rlsSinFreq 1.5
-    # curveSinFreq "-200.0 -148"
-    # levSin 1.0
+    # rlsSinFreq "1.5 1"
+    # curveSinFreq "-180.0 -348"
+    # levSin "1.0 0.2?"
     # attBpfFreq "0.01 0.06 0.001"
     # rlsBpfFreq 0.3
     # timeScaleBpf "1.5 2"
@@ -58,21 +59,22 @@ stack [
     # lineStartBpf 0.3
     # lineEndBpf 0.0
     # lineLevBpf 0.1
-    # gain 0.93
+    # amp 0.65
+    # hpf 50
     ,
     listen 1 $
     degradeBy 0.2 $
     someCyclesBy 0.6 (rot 1) $
-    s "~ t5snareSd(5,5) "
-    # amp 0.28
+    slow 4 $
+    s "~ t5snareSusSd(7,15,5) "
+    # amp 0.5
     # decay "0.2 {0.4 0.5? 0.2}%0.6"
-    # sus "0.2 {0.5 0.26}%0.5 0.16"
+    # sustain "1.2  2.16"
     # rel "0.1 0.02? 0.13"
     # tu "0.3 0.1 0.45"
     # hpfRq "0.5? 0.3 0.2"
     # lpfRq "0.5 {0.7 0.1 0.05}%0.75"
     # pan (range 0.25 0.75 $ slow 2 $ cat [tri, isaw ])
-    # gain 1.02
     ,
     listen 1 $
     sometimesBy 0.32
@@ -83,9 +85,9 @@ stack [
     ) $
     -- fast "3 2" $
     s "{newNoise48SusSd ~ [~ newNoise48SusSd] newNoise48SusSd _}%7"
-      # sustain 1
+      # sustain "1.3 0.6"
       # release "1 0.8 0.5 0.3"
-      # amp 1.0
+      # amp 1.2
       # env0L1 " 0.09 0.0002 0.1"
       # env0L2 3.0
       # env0L3 0.3
@@ -94,15 +96,13 @@ stack [
       # env0T2 2
       # env0T3 0.25
       # env0T4 0.25
-      # sustain "0.1 0.5 0.6? 0.32 <1.2 0.02>"
-      # coeff 2.0
-      # avar "3.0 11"
+      # coeff 4.0
+      # avar "3.0 1 11"
       # bvar "<-3.0 8>"
       # cvar "0.5 1.8 3"
       # dvar "1.5 <9 12>"
-      # xi (range 0 0.85 $ cat [square, cosine])
-      # yi (((2/7) <~) $ range 0.2 0.97 $ cat [saw, tri])
-      # gain 1.03
+      # xi "<1 2 3 4>"
+      # yi "<0.1 0.2 0.3 0.4 0.5>"
       ,
       listen 1 $
       juxBy 0.5 (slow 2) $
@@ -110,19 +110,23 @@ stack [
       degradeBy 0.2 $
       someCyclesBy 0.6 ((0.1 <~). (someCyclesBy 0.1 (zoom (0.3, 0.8)))) $
       someCyclesBy "0.2 0.4 0.6" (spin "1 2") $
-      s "kSpluck3Sd(<3 2 4 >,<10 5>)"
-      # amp 0.3
+      s "kSpluck3SusSd(<3 2 4 >,<10 5>)"
       # atk "0.0 0.01"
       # rls "0.1 0.01 0.2"
+      # sustain 1
       # midiPitch "4.0 8 6 4.2"
       # art "-3.0 {<-1.5 -2.5> -2}%3"
       # noiseFreq "1.0 0 0.25"
       # noiseLev "13000.0 800 60 1200"
       # noiseOffset "14010.0 7100 5000"
       # mix (slow 4 $ segment 16 $ range 0 0.5 saw)
-      # gain 1.03
-] # cps 0.9
+      # amp 0.4
+]
+# cps 0.9
+|* gain 0.9
 
+
+-- done 0702
 d1 $
   someCyclesBy (3/14) (inside "2 1" (slice 7 "1 2 5 3 0 4 6")) $
   someCyclesBy (1/7) (off 7 (bite 14 "<0 1> <2 3 2> <7 6> 5 <5 1> <2 4> <3 1>")) $
@@ -137,7 +141,8 @@ d1 $
     someCyclesBy (2.25/7) (jux ((rev ) . (slow 2))) $
     someCyclesBy (1/7) (degradeBy (2/7)) $
     listen 1 $
-    s "haty48SusSd(6,7,2)"
+      foldEvery [5,11] (listen 0) $
+      s "haty48SusSd(6,7,2)"
       # amp 0.45
       # sustain 0.8
       # release 0.12
@@ -248,7 +253,7 @@ d1 $
       # n "0 0.4 0.8 1"
       # accelerate "1 0.5 1 0.2"
       )
-        # shape 0
+        # shape 0.1
         # gain 0.65
         -- # gain (slow 7 $ segment 28 $ range 0.45 0.75 tri)
         # lpf "{800 1200 4500}%5"
@@ -260,13 +265,19 @@ d1 $
     (gap "3 4 14") $
     every 4 ((2/7) <~) $
     s "sdSd/2"
-      # amp 0.35
+      # pan "0.1 0.7 0.9 0.5 0.3"
+      # amp 0.29
       # atk 0.001
       # rls 0.05
       # ffreq 13000.0
   ]
   # cps 0.9
+  |* gain 1.055
 
+
+
+-- done 0702
+-- Pas top
 d1 $
   stack [
     listen 1 $
@@ -294,7 +305,7 @@ d1 $
     whenmod 9 5
     (chunk 3 ((# impRate "21 39") . (# squiz "0.2 2"))) $
     fast "2 1.5 <0.75 0.5>" $
-    s "{impnSd}%2.75"
+    s "{impnSusSd}%2.75"
       # amp 0.7
       # atk 0.0001
       # rls 0.01
@@ -328,7 +339,7 @@ d1 $
     whenmod 7 5
     (splice 5 "4 2 1 0 6 5") $
     every 2 ((wchoose[((2/7), 0.6), ((5/7), 0.4)]) <~) $
-    s "[plouxSd [~@0.2857 plouxSd ~] <~ plouxSd> ~]"
+    s "[plouxSusSd [~@0.2857 plouxSd ~] <~ plouxSd> ~]"
       # amp 2.4
       # atk 0.1
       # dcy 1
@@ -352,12 +363,12 @@ d1 $
     ,
     listen 1 $
     sometimesBy (1/5) (zoom (0,(6/11)). (fast 2) . (bite 5 "1 2 3 0 4")) $
-    s "feedbackOscSd(<2 5>,11,<19 2 4>)"
+    s "feedbackOscSusSd(<2 5>,11,<19 2 4>)"
       # hpf "200 60 2200"
       # atk "0.1 0.3"
       # attack 0.01
       # decay 0.2
-      # sustain 1
+      # sustain "1 1.32"
       # release "0.16 0.2 0.1"
       # rls "0.4 0.5 0.9"
       # mFrq "2313.0 3300"
@@ -370,6 +381,7 @@ d1 $
       # rq 1.4
   ]
   # cps 0.85
+  |* gain 0.97
 
 
 
