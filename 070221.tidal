@@ -1,0 +1,25 @@
+let
+ freqSaw = pF "freqSaw"
+ freqPls = pF "freqPls"
+ wPls = pF "wPls"
+ rlpfRq = pF "rlpfRq"
+ lfnFreq = pF "lfnFrq"
+ lfnMul = pF "lfnMul"
+ lfnAdd = pF "lfnAdd"
+
+
+d1 $
+  stack [
+   s "resSusSd(<3 5 7>,11,9)"
+   # sustain "1 2 1.2 0.3"
+   # freqSaw "40 90 900"
+   # freqPls "62 6000 1000"
+   # wPls "0.5 0.1 1.2 1"
+   # rlpfRq "0.1 0.2 0.3"
+   # lfnFreq "0.3 0.4 0.1"
+   # lfnMul "1000 900 30"
+   # lfnAdd "1500 20000 4000"
+   ,
+   s "jiletSusSd(<2 3>,22)"
+   # sus "0.1 0.3"
+   ]

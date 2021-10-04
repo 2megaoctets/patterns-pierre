@@ -384,7 +384,7 @@ d1 $
       # modAmt 0.2
       # sinfAdd 1.7
       # sinPhase 0.28
-      # sinpAdd 1.7
+      # sinpAdd 1.77
       # rf1Freq "938.8 500 200 12000"
       # rf1Rq 0.6
       # rf2Freq 1765.0

@@ -6,7 +6,7 @@ d1$
   whenmod 15 12 (# s "~") $
   every 3 (0.2 ~>) $
   listen 1 $
-  s "~? rimnewSd([[3 4][3 4]/2],5,2)"
+  s "~? rimnewSusSd([[3 4][3 4]/2],5,2)"
   # tu "0.4 0.2 0.8 1.2"
   # rls "0.05 0.2 0.1"
   # envLev1 "1.1 0.8"
@@ -19,7 +19,7 @@ d1$
   every 9 (density "[1.5 2]")$
   whenmod 8 6 (off 4 (# release 0.2)) $
   listen 1 $
-  s "snapkickSd([3 4],[5 10],[2 3])"
+  s "snapkickSusSd([3 4],[5 10],[2 3])"
   # bdFrqL1 "600 240"
   # bdFrqL2 "250 20 120"
   # clkfFundFreq "600 1200 120"
@@ -91,7 +91,7 @@ d1$
 d1 $
  stack [
  listen 1 $
-  s "rim808Sd([3 5],18,4)"
+  s "rim808SusSd([3 5],18,4)"
   # atk "0.1 0.2 0.05"
   # rls "0.05 0.01 0.2 5"
   # tuf "0.2 0.2 0.01"
@@ -121,7 +121,7 @@ d1 $
     # amp 0.2
   ,
   listen 1 $
-  s "kickmedSd([7 8 3],12)"
+  s "kickmedSusSd([7 8 3],12)"
   # env0L1  "1 0.9 1"
   # env0L2  "0.8 1 0.7 1"
   # env0L3  "0.7 1 1 0.8 1"
@@ -140,7 +140,7 @@ d1 $
   # ochoose "0 1 0"
   ,
   listen 1 $
-  weave 5 (s "kick3AwSd([3 5 0],[10 12])")
+  weave 5 (s "kick3AwSusSd([3 5 0],[10 12])")
       [ envL1 "[0 0.1 0.2] 0.5",
         envL2 "1 0.8 0.5",
         -- envL3 = 0.8,
@@ -160,11 +160,11 @@ d1 $
 
   -- done 0702
 -- pattern 3 en 7
-   d1 $
+ d1 $
    stack [
    listen 1 $
     every 7 ( density 2 . splice 3 "2 3 4 6 8") $
-    s "oneclapThorBrSd(4,7)"
+    s "oneclapThorBrSusSd(4,7)"
     # atk "0.01 0.2 0.02"
     # rls  "1 1.2 0.9"
     # atkT  "0.003 0.01 0.05"
@@ -193,7 +193,7 @@ d1 $
     rot "1 2 4" $
     slow 14 $
     listen 1 $
-    s "combsSd(<14 21>,<35 28 [42 49]>,9) ~ "
+    s "combsSusSd(<14 21>,<35 28 [42 49]>,9) ~ "
     # atk "<0.01 0.1>  "
     # dcy "0.1 0.2 0.4 0.01"
     # sustain "{<0.54 0.27 <0.07 0.36 0.12> <0.54 0.8 0.71> >}%5  "
