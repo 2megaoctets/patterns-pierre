@@ -24,8 +24,7 @@ d3 $
     # resonance (slow 16 $ range 0.1 0.7 cosine )
     # semitone "<8 .. 15> 0 0 <10 .. 14> 0"
     # accelerate "0 0 0 0 <0 0.25 0.5 1 -1>"
-    ]
-    # orbit 0
+    ] # orbit 0
     # cps 0.7
 
 
