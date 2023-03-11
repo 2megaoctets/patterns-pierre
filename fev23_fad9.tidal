@@ -25,7 +25,7 @@ d1 $
       -- cym down
       whenmod 32 26 (listen 0) $
       -- listen 0 $
-      listen (1 - ((cF 1 "24"))) $
+      listen (1 - (cF 1 "24")) $
       listen (slow 16 $ "0 [0 1] 0 [1 0] 0 [[1 0] 1] 0 [0 [1 0]] 0 0 [1 0]") $
       loopAt 2 $
       every 2
@@ -50,6 +50,7 @@ d1 $
       ,
       -- gratouille
       -- listen 0 $
+      listen (1 - (cF 1 "26")) $
       whenmod 20 17 (listen 0) $
       s "~ <pm:1 pm:2>@1.5 ~"
         # speed 0.33
@@ -167,8 +168,8 @@ d1 $
         # orbit "1"
       ,
       -- kick
-      listen 0 $
-      listen (1 - (cF 1 "26")) $
+      -- listen 0 $
+      listen (1 - (cF 1 "31")) $
       -- listen "<1 1 1 1  0/< 18 27>>" $
       whenmod 24 21 (listen 0) $
       -- every' 4 1 (every 2 (loopAt  2) . listen 0) $
@@ -193,7 +194,7 @@ d1 $
       -- essui glasse
       -- listen 0 $
       whenmod 20 16 (listen 0) $
-      listen (1 - (cF 1 "31")) $
+      -- listen (1 - (cF 1 "31")) $
       listen (slow 3 $ "<0 1 0 [1 0] 0 0>") $
       loopAt 6 $
       fast 4 $
@@ -217,15 +218,15 @@ clutchIn 1 18 $ silence
 -- ok gains filtrs 0223
 d1 $
 -- clutchIn 1 18 $
-  -- whenmod 16 12 (spread ($)[((1/11) ~>),iter " 2", pressBy "0.1 0.5", listen "<0 1>"]) $
-  -- someCyclesBy (1/7) (spread ($)[((1/11) ~>),iter " 2", pressBy "<0.1 0.75> 0.5", listen "<[0 1] [1 0]>"]) $
+  whenmod 16 12 (spread ($)[((1/11) ~>),iter " 2", pressBy "0.1 0.5", listen "<0 1>"]) $
+  someCyclesBy (1/7) (spread ($)[((1/11) ~>),iter " 2", pressBy "<0.1 0.75> 0.5", listen "<[0 1] [1 0]>"]) $
   stack [
     -- kick
-    listen ("1" - (cF 1 "23")) $
-    listen 0 $
+    -- listen ("1" - (cF 1 "23")) $
+    -- listen 0 $
     listen "<1 1 1 1 0>" $
     -- whenmod 22 18 (listen 0 . every 4 (loopAt "<2 4>")) $
-    -- sometimesBy (1/11)(slow "2 3"  . rot "<0 1 -2>" . bite 11 "<1 2 0>" . every 2 (listen 0)) $
+    sometimesBy (1/11)(slow "2 3"  . rot "<0 1 -2>" . bite 11 "<1 2 0>" . every 2 (listen 0)) $
     every' 4 1
     (within (4/7, 6/7) (choose [5/11, 3/11] ~>)) $
     -- every' "<4 2>" "<2 1>" (fast "<2 0.5/2>") $
@@ -255,7 +256,7 @@ d1 $
     ,
     -- reso
     listen (1 - (cF 1 "24")) $
-    listen 1 $
+    -- listen 1 $
     sometimesBy 0.09 (listen 0) $
     slow "<1 2>" $
     someCyclesBy (2/11) (rot "<1 3> -2" . sometimes (slow "<2 1> 3")) $
@@ -287,7 +288,7 @@ d1 $
     ,
     -- mouvement
     listen (1 - (cF 1 "25")) $
-    listen 1 $
+    -- listen 1 $
     whenmod 8 6 (listen 0 ) $
     slow "<1 1.5>" $
     -- someCyclesBy (3/11) (ghost' 2 . ((3/11) ~>)) $
@@ -312,7 +313,7 @@ d1 $
       # orbit 1
     ,
     -- blownoise
-    listen (1 - (cF 1 "26")) $
+    -- listen (1 - (cF 1 "26")) $
     listen "<1 1 1 0>" $
     loopAt "<2 4>" $
     (>| amp "0.6@0.75 0.3@0.5 0.5@0.75 0.32@0.75")$
@@ -338,7 +339,7 @@ d1 $
       # orbit 2
     ,
     -- bpwind
-    listen (1 - (cF 1 "27")) $
+    -- listen (1 - (cF 1 "27")) $
     listen "<1 0/5.5>" $
     slow "<2 3>" $
     (<| amp "0.3@0.75 0.1@1 0.56@1.5 0.37@1 0.5@0.75 0.6@0.5") $
@@ -360,7 +361,7 @@ d1 $
       # dist 0.3
     ,
     -- hi
-    listen (1 - (cF 1 "28")) $
+    -- listen (1 - (cF 1 "28")) $
     listen "<1 0 <1 0>>" $
     (<| amp (slow 4 $ "0.1@0.75 0.05@0.75 0.075@0.75 0.15@0.5")) $
     s "natwichSd"
@@ -376,7 +377,7 @@ d1 $
     ,
     -- sub
     listen (1 - (cF 1 "29")) $
-    listen 0 $
+    -- listen 0 $
     listen "<1 1 0>" $
     loopAt 4 $
     (<| amp "0.6@1 0.33@0.75 0.65@1.5 0.45@0.75 0.54@1.5") $
@@ -404,7 +405,7 @@ d1 $
     ,
     -- kick sec
     listen (1 - (cF 1 "30")) $
-    listen 0 $
+    -- listen 0 $
     listen "<1 1 0>" $
     slow 2 $
     (>| amp "0.45@0.75 0.67@1.5 0.45@1 0.53@0.75 0.16@0.75 0.4@0.75") $
@@ -426,7 +427,7 @@ d1 $
       # orbit 1
     ,
     -- rablawave
-    listen (1 - (cF 1 "31")) $
+    -- listen (1 - (cF 1 "31")) $
     listen "0 1 <1 0> 0" $
     loopAt 2 $
     every' 2 1 (splice 11 "1@0.75 0@1.5 3@2 4@0.75 2@0.5 8@1.5 7@0.75 6@0.25 10@1 5@1 9@1") $
@@ -461,7 +462,7 @@ d1 $
   (stutWith 2 (2/7) ((3/7) ~>)) $
   stack [
     listen 0 $
-    listen (1 - (cF 1 "23") $
+    -- listen (1 - (cF 1 "23")) $
     listen "<1 1 1 0?>" $
     someCyclesBy 0.1 (listen 0 . every 2 (slow 2)) $
     every' "<4 5>" "<1 2>" (loopAt 2 . listen 0) $
@@ -469,7 +470,7 @@ d1 $
     (stutWith 2 (2/7) ((3/7) ~>)) $
     fast "1 2 1" $
     randcat [
-      someCyclesBy (1/9) (loopAt "<1 2>" . every 4 ((1/9) ~>) .  someCyclesBy 0.13 (listen 0)) $
+      -- someCyclesBy (1/9) (loopAt "<1 2>" . every 4 ((1/9) ~>) .  someCyclesBy 0.13 (listen 0)) $
       (<| amp "{0.8!2 ~ [~ 0.78] ~}@5.5 ~ [~ 0.76]@0.5") $
       s "kickey_Sd"
       ,
@@ -501,10 +502,10 @@ d1 $
       -- # orientation 0.0
       # orbit 0
     ,
-    listen 0 $
-    listen (1 - (cF 1 "24") $
+    -- listen 0 $
+    -- listen (1 - (cF 1 "24")) $
     whenmod 20 16 (listen 0) $
-    listen 1 $
+    -- listen 1 $
     sometimesBy (1/9) ((ghost' 3). (|* gain 0.7)) $
     s "hatnew_Sd(<14 19 3>,28,2)"
       # amp 0.61
@@ -529,8 +530,8 @@ d1 $
       # gain 0.92
       # orbit 2
     ,
-    listen 0 $
-    listen (1 - (cF 1 "25") $
+    -- listen 0 $
+    -- listen (1 - (cF 1 "25")) $
     listen "<1 1 0>" $
     s "cym1_Sd(<1/4 1/7 1/6>,7,<2 3 -1>)"
       # amp 0.1
@@ -545,8 +546,8 @@ d1 $
       # rls 0.7
     ,
     -- listen 0 $
-    listen 1 $
-    listen (1 - (cF 1 "26") $
+    -- listen 1 $
+    -- listen (1 - (cF 1 "26")) $
     whenmod 12 10
     (mask (scramble 7 "t f f t f t t")) $
     every 5 (listen 0 . loopAt 2) $
@@ -566,11 +567,11 @@ d1 $
       # gain 1.05
       -- # triode 0.9
     ,
-    listen 1 $
-    listen (1 - (cF 1 "27") $
-    -- whenmod 18 15 (loopAt 2 . listen 0) $
+    -- listen 1 $
+    -- listen (1 - (cF 1 "27")) $
+    whenmod 18 15 (loopAt 2 . listen 0) $
     often (slow "<2 3 2>") $
-    -- someCyclesBy (1/9) ((|> xsdelay "0 0 0.1 0.4") . (<| tsdelay "0.01 <0.12 0.24>")) $
+    someCyclesBy (1/9) ((|> xsdelay "0 0 0.1 0.4") . (<| tsdelay "0.01 <0.12 0.24>")) $
     wedge (2/3) -- (1/3)
     (
       every 6 (slow "<2 3>" . listen 0) $
@@ -607,8 +608,8 @@ d1 $
     )
     # orbit 1
     ,
-    listen 0 $
-    listen (1 - (cF 1 "28") $
+    -- listen 0 $
+    -- listen (1 - (cF 1 "28")) $
     listen "<1 0/<5 6>>" $
     fast "1 3 2" $
     s "noise2_Sd(<4 2 7>,<14 9>,2)"
@@ -626,8 +627,8 @@ d1 $
       # orbit "<2 [1 2] [2 1]>"
     ,
     listen 0 $
-    listen (1 - (cF 1 "29") $
-    listen 1 $
+    listen (1 - (cF 1 "29")) $
+    -- listen 1 $
     loopAt "4 <2 4>" $
     s "bassSat_Sd(<2 1 0>,7,5)"
       # amp 0.25
@@ -643,7 +644,7 @@ d1 $
       # orbit 0
     ,
     listen 0 $
-    listen (1 - (cF 1 "30") $
+    -- listen (1 - (cF 1 "30") $
     slow 2 $
     s "~ squareDrum_Sd(<1 3 2>,7,<4 5>)"
       # amp 0.6
@@ -672,14 +673,14 @@ d1 $
   someCyclesBy 0.16
   (
     (# legato 2)
-    -- . (
-    --   inside 5
-    --   (spreadf [
-    --       brak ,
-    --       ply "1 <2 [2 1]>",
-    --       slow 4 . gap "<12 [24 6] [12 3]>",
-    --       append "~"
-    --   ]))
+    . (
+      inside 5
+      (spreadf [
+          brak ,
+          ply "1 <2 [2 1]>",
+          slow 4 . gap "<12 [24 6] [12 3]>",
+          append "~"
+      ]))
   ) $
   stack [
     -- listen 0 $
@@ -898,20 +899,20 @@ d1 $
 --  en cours 1106, seq niveaux ok, rajouter fonctions / silences
 d1 $
 -- clutchIn 1 10 $
-  -- whenmod 9 6 (spreadf [sometimesBy 0.111111111 (iter' 1), slow 2, listen 0] ) $
-  -- someCyclesBy (1/9) ((slowSqueeze "<0.166666 0.111111111 5.555555555555555e-2 4.16666666666666666664e-2>") . (# gain 0.85)) $
+  whenmod 9 6 (spreadf [sometimesBy 0.111111111 (iter' 1), slow 2, listen 0] ) $
+  someCyclesBy (1/9) ((slowSqueeze "<0.166666 0.111111111 5.555555555555555e-2 4.16666666666666666664e-2>") . (# gain 0.85)) $
   stack [
     listen (1 - (cF 1 "23")) $
     -- listen 0 $
     -- someCyclesBy (1/18) (slow 1.5) $
-    -- whenmod 9 6 (spreadf [sometimesBy 0.111111111 (iter' 1), slow 2, listen 0] ) $
+    whenmod 9 6 (spreadf [sometimesBy 0.111111111 (iter' 1), slow 2, listen 0] ) $
     sew (someCycles  (fast "2 <1 2>") $ every' 3 1 (slow 2) $ "[t f@2]!3 f t@4 f")
     -- sew "t" -- kick
     -- sew "f" -- metro_Sd
     (
       sew ("f@5 t")
       (
-        -- listen 0 $
+        listen 0 $
         randcat [
           (<| amp ( "0.45!<4 6> 0.0@<5 3> ")) $
           s "kickBoomy_Sd"
@@ -1115,10 +1116,12 @@ d1 $
 
 -- 5
 
+clutchIn 1 5 $ silence
+
 resetCycles
 
 -- 100223
--- xfadeIn 1 14 $
+-- xfadeIn 1 19 $ silence
 d1 $
   -- whenmod 18 12
   someCyclesBy 0.088
@@ -1144,7 +1147,7 @@ d1 $
     someCyclesBy 0.133 ((0.5) <~) $
     cat [
       listen (1 - (cF 1 "23")) $
-      listen 0 $
+      -- listen 0 $
       (<| amp ("[[0.9(2, 3) [[0.5 ~] 0.9@2] ~@0.5] [[0.9@2 [0.5 ~]] ~@0.5 0.9(2, 3, <3 3 4>)]]" * 0.6))
       $ s "kick808new_Sd"
         # envL1 1.0
@@ -1173,7 +1176,7 @@ d1 $
         # orbit 0
       ,
       listen (1 - (cF 1 "24")) $
-      listen 0 $
+      -- listen 0 $
       whenmod 19 16 (listen 0) $
       ((0.75) ~>) $
       (<| amp (slow 2 $ "[0.31 0.23(2,5)] !")) $
@@ -1207,6 +1210,7 @@ d1 $
         # orbit 0
     ]
     ,
+    -- listen 0 $
     listen (1 - (cF 1 "25")) $
     listen "<1 1 0 [1 0]>" $
     every' 5 1 (((0.75) ~>) . every 2 (loopAt 2)) $
@@ -1215,12 +1219,12 @@ d1 $
       # gain 0.85
     ,
     listen (1 - (cF 1 "26")) $
-    listen 1 $
+    -- listen 0 $
     sometimesBy 0.21
     (|* yMajor 120) $
     every 4
     ((+| yMajor "<12 21>") . (*| rMajor (50 * sine))) $ -- 1221
-    s "cFrcSegs_Sd@4"
+    s "circSegs_Sd@4"
       # amp 0.4
       # attack "<0.3 0.6 0.16>"
       -- # dec 2.4
@@ -1234,7 +1238,7 @@ d1 $
       # rMajor (slow 2.2 $ range 0.2 2 sine) -- 1.9
       # rMinor 1.1
       # freqfund (sometimesBy 0.1 (* (fast "2 [2 4]" $ fromTo 1.1 1.3)) $ "<0.29.4? 0.43>")
-      # cFrclefreq "<0.0037 0.031> * <3 0.12 0.04>"
+      # circlefreq "<0.0037 0.031> * <3 0.12 0.04>"
       # gain 0.76
       # hpf 180
       # orbit 1
@@ -1277,7 +1281,7 @@ d1 $
         # gain 0.7
       ,
       listen (1 - (cF 1 "28")) $
-      listen "<1 0 1>" $
+      listen "<1 <0 1>>" $
       every 15 (listen 0) $
       fast "[2 1]" $
       (<| amp "0.3@2 <~@2 ~> <0.21 0.34@2>") $
@@ -1362,7 +1366,7 @@ d1 $
     whenmod 15 11 (listen 0) $
     every 3 (chunk 4 ((hurry 2))) $
     fix (# gain 0.62) (s "cp") $
-    slow 2 $
+    -- slow 2 $
     (<| speed "0.5 [-1 0] [2 1] ~")   $
     s "[cp:7 fp]"
       # accelerate "0 0 [-0.5 0.75] 0"
@@ -1373,10 +1377,10 @@ d1 $
 
 
 -- 180223
--- xfadeIn 1 12 $
+-- xfadeIn 1 16 $
 d1 $
   -- every 6
-  someCyclesBy 0.24
+  -- someCyclesBy 0.24
   (
     (chunk 5 (spreadf [spin 2, hurry "2 0.5"]))
     . fix (# hpf 120) (s "Sd_kick3new")
@@ -1386,8 +1390,8 @@ d1 $
     . (# legato 1.2)
   ) $
   stack [
-     listen 0 $
-     listen (1 - (cF 1 "23")) $
+     -- listen 0 $
+     listen (1 - (cF 1 "23") ) $
      whenmod 13 10 (listen 0) $
      (<| sustain "[0.32!2 0.15]!3 <0.315 0.125>!2") $
      -- (<| sustain "[0.28 0.1]!2 0.7 0.2@2" ) $
@@ -1401,8 +1405,8 @@ d1 $
        # hpf 80
        # gain 1.03
      ,
-     listen 0 $
-     listen (1 - (cF 1 "24")) $
+     -- listen 0 $
+     listen (1 - ( cF 1 "24")) $
      every 5 (listen 0) $
      foldEvery [3,7] ("<[0.2 -0.4] [0.4 -0.2]>" <~) $
      -- (<| amp "[0@2 0.3]!2 0.1 0@2") $
@@ -1463,7 +1467,7 @@ d1 $
     ,
     -- listen 0 $
     listen (1 - (cF 1 "25")) $
-    every 10 (listen 0) $
+    foldEvery [5,7] (listen 0) $
     someCyclesBy 0.35
     ((wchoose [(0.25, 0.34), (0.75, 0.23), (0.125, 0.43)]) ~>) $
     (slow 2 . (# pan (smooth $ slow 2.2 $ range 0 1 tri ))) $
@@ -1527,7 +1531,7 @@ d1 $
       # harmTime 0.22
       # atk 0.0049999998882413
       # rls "<9 4>"
-      # excFterRel "0.25 0.7"
+      # exciterRel "0.25 0.7"
       # gain 0.84
     ,
     -- listen 0 $
@@ -1576,7 +1580,7 @@ d1 $
       # orbit 2
       # gain 0.7
     ,
-    listen 0 $
+    -- listen 0 $
     listen (1 - (cF 1 "29")) $
     foldEvery [5,8] (listen 0 . slow 2) $
     someCyclesBy 0.7 (spreadf [fastGap "<4 6 8 12>", fastGap "[<4 3> 8]", listen 0]) $
@@ -1651,8 +1655,8 @@ resetCycles
 -- ok niveaux
 -- clutchIn 1 23 $
 d1 $
-  -- every 7 (chunk 6 (fast (10/6))) $
-  every 14 (chunk 6 (brak)) $
+  every 7 (chunk 6 (fast (10/6))) $
+  -- every 14 (chunk 6 (brak)) $
   every 13 (("<0.166666 -0.33333 0.5>" ~>)) $
   every 11 (inside 3 (ply "1 2")) $
   every 5 (slow "<2 1.5>" . (0.33333 <~) ) $
@@ -1861,10 +1865,10 @@ d1 $
 |* gain 1.36
 # cps 0.555
 
-clutchIn 1 12 $ silence
+clutchIn 1 22 $ silence
 
 -- ok 230223
--- xfadeIn 1 12 $
+-- xfadeIn 1 22 $
 d1 $
   every 9 (slow 2 . gap  "<[6 3] 3>") $
   every 3 (chunk 6 (hurry "[2 | 0.5]")) $
@@ -1966,7 +1970,7 @@ d1 $
       # pan (segment 18 $ fast 2.1 $ range 0 1 tri)
       -- # rq 0.1
       # hpf 110
-      # orbit 1
+      -- # orbit 1
     ,
     listen (1 - (cF 1 "29")) $
     -- listen 0 $
