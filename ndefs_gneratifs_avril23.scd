@@ -1,5 +1,3 @@
-// reprends L 1291
-
 (
 ~lcmnoisePreset =  (amp: 0.1, atk: 0.001, rls: 0.2, sustain: 1, spread: 1, GHsize: 1.6); // default
 )
@@ -1521,45 +1519,100 @@ Ndef(\nozkurt).play(2);
 
 Ndef(\nozkurt).release(10);
 
-/*
 (
-Ndef(\tirgo, { arg out = 0, amp = 1, pan = 0, att = 0.01, rel = 5, blipFreqMod = 2, blipHarmo = 400, brfFreq = 150, brfRq = 2, gate = 1, doneAction = 2;
+~tirgoPreset = (amp: 0.21, att: 0.01, rel: 5, blipFreqMod: 2, blipHarmo: 400, brfFreq: 150, brfRq: 2);
+// default
+)
+
+(
+~tirgoPreset = ( 'brfRq': 0.93783041238785, 'att': 0.044967068433762, 'rel': 4, 'brfFreq': 326, 'amp': 0.21, 'blipHarmo': 471, 'blipFreqMod': 3.0236197412014 );
+)
+
+(
+~tirgoPreset = ( 'brfRq': 1.7299792766571, 'att': 0.020413483381271, 'rel': 3, 'brfFreq': 237,  'amp': 0.21, 'blipHarmo': 201, 'blipFreqMod': 0.87983870506287 );
+)
+
+(
+~tirgoPreset = ( 'brfRq': 1.8334934711456, 'att': 0.091781142950058, 'rel': 4, 'brfFreq': 298, 'amp': 0.21, 'blipHarmo': 515, 'blipFreqMod': 2.7309162318707);
+)
+
+(
+~tirgoPreset = (amp: 0.21, att: rrand(0.01, 0.1), rel: rrand(3,5), blipFreqMod: rrand(0.75, 4), blipHarmo: rrand(200, 600), brfFreq: rrand(150, 400), brfRq: rrand(0.9, 2))
+// rrand
+)
+
+(
+Ndef(\tirgo, {
+	// amp = 1, att = 0.01, rel = 5, blipFreqMod = 2, blipHarmo = 400, brfFreq = 150, brfRq = 2;
 	var sig, noise, thunder, rainStep, env, delayTime;
 	// env = Linen.kr(gate, att, 1, rel, doneAction);
-	env = EnvGen.ar(Env.asr(att, 1, rel), gate, doneAction: doneAction);
+	env = EnvGen.ar(Env.asr(~tirgoPreset[\att], 1, ~tirgoPreset[\rel]));
 	noise = PinkNoise.ar(1!2);
-	rainStep = noise + Blip.ar(noise + blipFreqMod, blipHarmo);
+	rainStep = noise + Blip.ar(noise + ~tirgoPreset[\blipFreqMod], ~tirgoPreset[\blipHarmo]);
 	rainStep = BRF.ar(
 		rainStep,
-		brfFreq,
-		brfRq,
+		~tirgoPreset[\brfFreq],
+		~tirgoPreset[\brfRq],
 		0.1
 	);
 	thunder = LPF.ar(FreeVerb2.ar(*LPF.ar(noise + 0.2 * Dust.ar(0.1), 60) ++ [1, 1, 0.2, 1e4]).tanh, 2000);
 	sig = rainStep + thunder;
-	sig = sig * env * amp;
+	sig = sig * env * ~tirgoPreset[\amp];
 	// OffsetOut.ar(out, sig);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan));
+	// OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan));
 });
 )
 
-SynthDef(\lmcd, { arg out = 0, amp = 1, pan = 0, att = 0.01, rel = 5, trigDur = 0.1, lfCubTu = 1, hpfFreq = 440, gate = 1, doneAction = 2;
+Ndef(\tirgo).fadeTime_(9);
+
+Ndef(\tirgo).play(2);
+
+Ndef(\tirgo).release(12);
+
+
+(
+~lmcdPreset = (amp: 0.21, att: 0.01, rel: 5, trigDur: 0.1, lfCubTu: 1, hpfFreq: 440);
+// default
+)
+
+(
+~lmcdPreset = ( 'att': 0.036224783658981, 'hpfFreq': 440, 'lfCubTu': 0.83353449106216, 'rel': 4.0325203537941, 'trigDur': 0.067111976146698, 'amp': 0.21 )
+)
+
+(
+~lmcdPreset = ( 'att': 0.080523428916931, 'hpfFreq': 440, 'lfCubTu': 0.96023582220078, 'rel': 4.3934026360512, 'trigDur': 0.036587396860123, 'amp': 0.21 )
+)
+
+(
+~lmcdPreset = ( 'att': 0.054452003240585, 'hpfFreq': 440, 'lfCubTu': 0.2589919090271, 'rel': 4.8915323615074, 'trigDur': 0.012462729215622, 'amp': 0.21 )
+)
+
+(
+~lmcdPreset = (amp: 0.21, att: rrand(0.01, 0.1), rel: rrand(2.5, 5), trigDur: rrand(0.01, 0.1), lfCubTu: rrand(0.1, 1), hpfFreq: 440);
+// rrand
+)
+
+(
+Ndef(\lmcd, {
 	var sig, noise, thunder, rainStep, env, delayTime;
 	// env = Linen.kr(gate, att, 1, rel, doneAction);
-	env = EnvGen.ar(Env.asr(att, 1, rel), gate, doneAction: doneAction);
-	sig = Duty.kr(trigDur, 0, Dseq(fib(32).wrap(20, 55).midicps, inf));
-	sig = LFCub.ar([-1, sig, sig / 3, -2] * lfCubTu);
+	env = EnvGen.ar(Env.asr(~lmcdPreset[\att], 1, ~lmcdPreset[\rel]));
+	sig = Duty.kr(~lmcdPreset[\trigDur], 0, Dseq(fib(32).wrap(20, 55).midicps, inf));
+	sig = LFCub.ar([-1, sig, sig / 3, -2] * ~lmcdPreset[\lfCubTu]);
 	sig = LeakDC.ar(sig) * 9;
-	sig = HPF.ar(sig, hpfFreq).clip2 / 9;
+	sig = HPF.ar(sig, ~lmcdPreset[\hpfFreq]).clip2 / 9;
 	sig = sig * env;
-	sig = Splay.ar(sig, 1, amp);
+	sig = Splay.ar(sig, 1, ~lmcdPreset[\amp]);
 	// OffsetOut.ar(out, sig);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan));
-}).add;
+	// OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan));
+});
+)
 
+Ndef(\lmcd).fadeTime_(10);
 
+Ndef(\lmcd).play(2);
 
-*/
+Ndef(\lmcd).release(12);
 
 // pb syntaxe ?
 
