@@ -1044,7 +1044,7 @@ Ndef(\factorFun1).fadeTime_(17);
 
 Ndef(\factorFun1).play(2);
 
-Ndef(\factorFun1).release(12);
+Ndef(\factorFun1).release(32);
 
 (
 ~lcm1Preset = (amp: 0.1, atk: 0.001, rls: 0.2, sustain: 1, rate1: 200, loRange1: 1, rate2: 6, loRange2: 10);
@@ -1087,7 +1087,7 @@ Ndef(\lcm1).clear;
 
 Ndef(\lcm1).play(2);
 
-Ndef(\lcm1).release(9);
+Ndef(\lcm1).release(29);
 
 // attention aux amp
 
@@ -2047,18 +2047,25 @@ Ndef(\west).release(9);
 Ndef(\west).fadeTime_(48);
 
 
-à faire
+(
+~additiveSinPreset = (amp: 0.1, attack: 0.001, release: 12, sustain: 1, curve: (-4), envPow: 1, sampleRate: 44100);
+// default
+)
 
-SynthDef(\addiditiveSin_Sd, { arg out = 0, amp = 0.9, pan = 0, attack = 0.001, release = 1.2, sustain = 1, curve = (-4), envPow = 1, sampleRate = 44100, doneAction = 2;
+// se débarrasser de l'enveloppe
+
+(
+Ndef(\additiveSin, {
+	// arg out = 0, amp = 0.9, pan = 0, attack = 0.001, release = 1.2, sustain = 1, curve = (-4), envPow = 1, sampleRate = 44100, doneAction = 2;
 	var sig, globalEnv, buffAmp, numPartials = 50;
 
-	globalEnv = EnvGen.kr(Env.perc(attack, release, 1, curve), timeScale: sustain, doneAction: doneAction).pow(envPow);
+	globalEnv = EnvGen.kr(Env.perc(~additiveSinPreset[\attack], ~additiveSinPreset[\release], 1, ~additiveSinPreset[\curve]), timeScale: ~additiveSinPreset[\sustain]).pow(~additiveSinPreset[\envPow]);
 
 	buffAmp = LocalBuf(numPartials);
 
 	BufWr.ar(
 		LFGauss.ar(
-			duration: sampleRate.reciprocal * numPartials / \factor.kr(1, 0.5),
+			duration: ~additiveSinPreset[\sampleRate].reciprocal * numPartials / \factor.kr(1, 0.5),
 			width: \width.kr(0.2, 0.5),
 			iphase: \phase.kr(0, 0.5).mod(4)
 		),
@@ -2081,10 +2088,35 @@ SynthDef(\addiditiveSin_Sd, { arg out = 0, amp = 0.9, pan = 0, attack = 0.001, r
 	/*sig = Pan2.ar(sig * globalEnv, pan, amp);
 
 	OffsetOut.ar(out, sig);*/
-	OffsetOut.ar(out, DirtPan.ar(sig * globalEnv, ~dirt.numChannels, pan, amp));
-}).add;
+	// OffsetOut.ar(out, DirtPan.ar(sig * globalEnv, ~dirt.numChannels, pan, amp));
+	sig = (sig * globalEnv * ~additiveSinPreset[\amp ]);
+});
+)
 
-SynthDef(\fbDelNet_Sd, { arg out = 0, pan = 0, amp = 0.2, attack = 0.001, release = 1.2, sustain = 1, curve = (-4), envPow = 1, doneAction = 2;
+Ndef(\additiveSin).clear;
+
+Ndef(\additiveSin).play(2);
+
+Ndef(\additiveSin).fadeTime_(10);
+
+Ndef(\additiveSin).release(9);
+
+Ndef(\additiveSin).stop;
+
+(
+~fbDelNetPreset = (amp: 0.2, attack: 0.001, release: 12, sustain: 10, curve: (-4), envPow: 1);
+// default
+)
+
+(
+~fbDelNetPreset = (amp: 0.2, attack: rrand(0.001, 0.1), release: 1, sustain: 2, curve: rrand(-4, 2), envPow: 1);
+// rrand
+)
+
+// se débarrasser de l'enveloppe
+(
+Ndef(\fbDelNet, {
+	// arg out = 0, pan = 0, amp = 0.2, attack = 0.001, release = 1.2, sustain = 1, curve = (-4), envPow = 1, doneAction = 2;
     var trig = \trig.tr(1);
     var size, delTimes, delTimesSec, order;
     var sig, inSig, modEnv, gainEnv, delMod;
@@ -2114,7 +2146,7 @@ SynthDef(\fbDelNet_Sd, { arg out = 0, pan = 0, amp = 0.2, attack = 0.001, releas
 
     delMod = SinOsc.ar(2).linlin(-1, 1, 1, 4);
 
-    gainEnv = EnvGen.ar(Env.perc(attack, release, 1, curve), timeScale: sustain, doneAction: doneAction).pow(envPow);
+	gainEnv = EnvGen.ar(Env.perc(~fbDelNetPreset[\attack], ~fbDelNetPreset[\release], 1, ~fbDelNetPreset[\curve]), timeScale: ~fbDelNetPreset[\sustain], doneAction: 2).pow(~fbDelNetPreset[\envPow]);
     modEnv = EnvGen.ar(Env([0,1,0], [0.125, 0.5], [-8.0, -4.0]), trig);
 
 	inSig = Saw.ar(XLine.kr(\startFreq.kr(100), \endFreq.kr(1000), \durFreq.kr(0.1))) * gainEnv;
@@ -2135,39 +2167,90 @@ SynthDef(\fbDelNet_Sd, { arg out = 0, pan = 0, amp = 0.2, attack = 0.001, releas
     sig = sig.sum;
     LocalOut.ar(sig);
     // OffsetOut.ar(out, Pan2.ar((inSig + Splay.ar(sig)), pan, amp) * 0.5);
-	OffsetOut.ar(out, DirtPan.ar((inSig + Splay.ar(sig)), ~dirt.numChannels, pan, amp));
-}).add;
+	// OffsetOut.ar(out, DirtPan.ar((inSig + Splay.ar(sig)), ~dirt.numChannels, pan, amp));
+	sig = (inSig + Splay.ar(sig) * ~fbDelNetPreset[\amp] );
+});
+)
 
+Ndef(\fbDelNet).play(2);
 
-SynthDef(\LiljedMyst_Sd, { arg out = 0, amp = 0.6, pan = 0, attack = 0.01, release = 4, sustain = 1, curve = (-4), envPow = 1, pNoiseFreq = 0.5, hpfFreq = 10, modDur = 9, lfnFreq = 0.05, ringFreq = 55, ringDec = 0.2, revTime = 99, gate = 1, doneAction = 2;
+Ndef(\fbDelNet).fadeTime_(0);
+
+Ndef(\fbDelNet).release(9);
+
+// ne fonctionne pas
+
+(
+~liljedMystPreset = (amp: 0.6, attack: 0.01, release: 4, sustain: 1, curve: (-4), envPow: 1, pNoiseFreq: 0.5, hpfFreq: 10, modDur: 9, lfnFreq: 0.05, ringFreq: 55, ringDec: 1.2, revTime: 99);
+)
+
+(
+Ndef(\LiljedMyst, {
+	// arg out = 0, amp = 0.6, pan = 0, attack = 0.01, release = 4, sustain = 1, curve = (-4), envPow = 1, pNoiseFreq = 0.5, hpfFreq = 10, modDur = 9, lfnFreq = 0.05, ringFreq = 55, ringDec = 0.2, revTime = 99, gate = 1, doneAction = 2;
 	var sig, globalEnv;
-	globalEnv = EnvGen.kr(Env.perc(attack, release, curve: curve), timeScale: sustain, doneAction: doneAction).pow(envPow);
-	sig = HPF.ar(PinkNoise.ar(pNoiseFreq), hpfFreq) * Line.kr(0, 1, modDur);
+	globalEnv = EnvGen.kr(Env.perc(~liljedMystPreset[\attack], ~liljedMystPreset[\release], curve: ~liljedMystPreset[\curve]), timeScale: ~liljedMystPreset[\sustain], doneAction: 2).pow(~liljedMystPreset[\envPow]);
+	sig = HPF.ar(PinkNoise.ar(~liljedMystPreset[\pNoiseFreq]), ~liljedMystPreset[\hpfFreq]) * Line.kr(0, 1, ~liljedMystPreset[\modDur]);
 	sig = GVerb.ar(
 		({ |i|
 			Ringz.ar(
-				sig * LFNoise1.kr(lfnFreq + 0.1.rand),
-				ringFreq * i + 60,
-				ringDec
+				sig * LFNoise1.kr(~liljedMystPreset[\lfnFreq] + 0.1.rand),
+				~liljedMystPreset[\ringFreq] * i + 60,
+				~liljedMystPreset[\ringDec]
 			)
 		}!24).sum,
 		2,
-		revTime
+		~liljedMystPreset[\revTime]
 	).tanh;
-	sig = sig * globalEnv * amp;
+	sig = sig * globalEnv * ~liljedMystPreset[\amp];
 	// OffsetOut.ar(out, sig);
-	OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, amp));
-}).add;
+	// OffsetOut.ar(out, DirtPan.ar(sig, ~dirt.numChannels, pan, amp));
+});
+)
+
+Ndef(\liljedMyst).play(2);
 
 
-SynthDef(\rungler, { arg out = 0, amp = 0.2, spread = 0.3, attack = 0.001, release = 1.4, sustain = 1, curve = (-4), envPow = 1, lfoTrigRate = 0.4, tu = 24, ffreq = 24, gate = 1, doneAction = 2;
+(
+~runglerPreset = (amp: 0.2, spread: 0.3, attack: 0.001, release: 1.4, sustain: 1, curve: (-4), envPow: 1, lfoTrigRate: 0.4, tu: 24, ffreq: 24, gate: 1, doneAction: 2);
+// default
+)
+
+(
+~runglerPreset = ( 'sustain': 1, 'spread': 0.024839186668396, 'release': 1.9842470645905, 'lfoTrigRate': 0.25718367099762,
+  'envPow': 1.0567637443542, 'amp': 0.2, 'ffreq': 334.63054275513, 'curve': -2, 'tu': 7.5839493274689,
+  'attack': 0.050888548016548 );
+)
+
+(
+~runglerPreset = ( 'sustain': 1, 'spread': 0.28134504079819, 'release': 9.4825898170471, 'lfoTrigRate': 0.50979968309402,
+  'envPow': 0.98303428888321, 'amp': 0.2, 'ffreq': 24.855098724365, 'curve': -4, 'tu': 15.518655776978,
+  'attack': 0.01711200273037 );
+)
+
+(
+~runglerPreset = ( 'sustain': 1, 'spread': 0.19752838850021, 'release': 1.5388622999191, 'lfoTrigRate': 0.72720127105713,
+  'envPow': 0.84595999717712, 'amp': 0.2, 'ffreq': 210.51501846313, 'curve': -4, 'tu': 13.242499351501,
+  'attack': 0.083144748568535 );
+)
+
+(
+~runglerPreset = (amp: 0.2, spread: rrand(0.01, 0.5), attack: rrand(0.001, 0.1), release: rrand(1.4, 10), sustain: 1, curve: rrand(-4, 2), envPow: rrand(0.6, 1.1), lfoTrigRate: rrand(0.1, 0.8), tu: rrand(4.0, 42), ffreq: rrand(24.0, 440));
+// rrand
+)
+
+
+(
+Ndef(\rungler, {
+	// arg amp = 0.2, spread = 0.3, attack = 0.001, release = 1.4, sustain = 1, curve = (-4), envPow = 1, lfoTrigRate = 0.4, tu = 24, ffreq = 24, gate = 1, doneAction = 2;
     var rungler, lfo, snd, runglerOut, globalEnv;
 
-	globalEnv = EnvGen.ar(Env.asr(attack, sustain, release, curve), gate, doneAction: doneAction).pow(envPow);
+	// globalEnv = EnvGen.ar(Env.asr(~runglerPreset[\attack], ~runglerPreset[\sustain], ~runglerPreset[\release], ~runglerPreset[\curve]), gate, doneAction: doneAction).pow(envPow);
+
+	globalEnv = EnvGen.ar(Env.asr(~runglerPreset[\attack], ~runglerPreset[\sustain], ~runglerPreset[\release], ~runglerPreset[\curve])).pow(~runglerPreset[\envPow]);
 
     lfo = {
         var trigger;
-        trigger = Dust.ar(lfoTrigRate);
+		trigger = Dust.ar(~runglerPreset[\lfoTrigRate]);
         Select.ar(ToggleFF.ar(trigger), [
             LFNoise2.ar(TExpRand.ar(0.5, 10, trigger)),
             TRand.ar(-1, 1, trigger),
@@ -2199,23 +2282,57 @@ SynthDef(\rungler, { arg out = 0, amp = 0.2, spread = 0.3, attack = 0.001, relea
     snd = LocalIn.ar(2);
     runglerOut = rungler.(snd[0], snd[1]);
     snd = [runglerOut[\out], runglerOut[\outReverse]];
-    snd = LFTri.ar(({ lfo.() } ! 2).linexp(-1, 1, [10, 1], 8000) * (snd * tu).midiratio);
+	snd = LFTri.ar(({ lfo.() } ! 2).linexp(-1, 1, [10, 1], 8000) * (snd * ~runglerPreset[\tu]).midiratio);
     LocalOut.ar(LeakDC.ar(Sanitize.ar(snd)));
     snd = (snd[0] > snd[1]) - 0.5;
-    snd = MoogFF.ar(snd, ({ lfo.() } ! 2).linexp(-1, 1, 100, 8000) * (runglerOut[\out] * ffreq).midiratio, 3);
-    snd = Splay.ar(snd, spread);
+	snd = MoogFF.ar(snd, ({ lfo.() } ! 2).linexp(-1, 1, 100, 8000) * (runglerOut[\out] * ~runglerPreset[\ffreq]).midiratio, 3);
+	snd = Splay.ar(snd, ~runglerPreset[\spread]);
     snd = snd * globalEnv * -10.dbamp;
-    OffsetOut.ar(out, snd * amp);
-}).add;
+	// OffsetOut.ar(out, snd * amp);
+	snd = snd * ~runglerPreset[\amp];
+});
+)
 
+Ndef(\rungler).fadeTime_(16);
 
-SynthDef(\easel, { arg out = 0, amp = 0.2, pan = 0, attack = 0.0001, release = 1.2, sustain = 1, curve = 0, envPow = 1, selFilt = 3, gate = 1, doneAction = 2;
+Ndef(\rungler).play(2);
+
+Ndef(\rungler).release(12);
+
+(
+~easelPreset = (amp: 0.0612, attack: 0.0001, release: 1.2, sustain: 1, curve: 0, envPow: 1, selFilt: 3);
+// default
+)
+
+(
+~easelPreset = ( 'envPow': 1, 'release': 2.4481200218201, 'curve': 1.3878145217896, 'selFilt': 7, 'amp': 0.0612, 'sustain': 1, 'attack': 0.058201573085785 );
+// harsh noise
+)
+
+(
+~easelPreset = ( 'envPow': 1, 'release': 3.1073297023773, 'curve': 3.808445930481, 'selFilt': 6,  'amp': 0.0612, 'sustain': 1, 'attack': 0.014150855028629 )
+// shitnoise
+)
+
+(
+~easelPreset = ( 'envPow': 1, 'release': 3.6880983352661, 'curve': -0.77374982833862, 'selFilt': 2, 'amp': 0.0612, 'sustain': 1, 'attack': 0.031918237555027 );
+// gros gate
+)
+
+(
+~easelPreset = (amp: 0.0612, attack: rrand(0.0001, 0.1), release: rrand(1.2, 4), sustain: 1, curve: rrand(-2.0, 4), envPow: 1, selFilt: rrand(3, 7));
+// rrand
+)
+
+(
+Ndef(\easel, {
+	// arg out = 0, amp = 0.2, pan = 0, attack = 0.0001, release = 1.2, sustain = 1, curve = 0, envPow = 1, selFilt = 3, gate = 1, doneAction = 2;
     var snd, numInputs, numOutputs, globalEnv;
     numInputs = 12;
     numOutputs = 6;
     snd = LocalIn.ar(numOutputs);
 
-    globalEnv = EnvGen.ar(Env.asr(attack, sustain, release, curve), gate, doneAction: doneAction).pow(envPow);
+	globalEnv = EnvGen.ar(Env.asr(~easelPreset[\attack], ~easelPreset[\sustain], ~easelPreset[\release], ~easelPreset[\curve])).pow(~easelPreset[\envPow]);
     // Matrix-vector multiplication using multichannel expansion.
     snd = snd * ({ { LFNoise2.kr(0.5)/*.round*/ } ! numInputs } ! numOutputs);
     snd = snd.sum;
@@ -2228,7 +2345,7 @@ SynthDef(\easel, { arg out = 0, amp = 0.2, pan = 0, attack = 0.0001, release = 1
         // Oscillator in audio range only
         SinOsc.ar(snd[1].linexp(-1, 1, 100, 8000)),
         // Wavefolder with controllable gain
-        (snd[2] * snd[3].linexp(-1, 1, 1, 10)).fold2,
+		(snd[2] * snd[3].linexp(-1, 1, [1, 1], 10)).fold2,
         // Two filters with controllable cutoff and resonance
         MoogFF.ar(snd[4], snd[5].linexp(-1, 1, 10, 8000), snd[6].linlin(-1, 1, 0, 4)) * 3.dbamp,
         MoogFF.ar(snd[7], snd[8].linexp(-1, 1, 10, 8000), snd[9].linlin(-1, 1, 0, 4)) * 3.dbamp,
@@ -2244,10 +2361,18 @@ SynthDef(\easel, { arg out = 0, amp = 0.2, pan = 0, attack = 0.0001, release = 1
     snd = Sanitize.ar(snd);
     LocalOut.ar(snd);
 
-    snd = Select.ar(selFilt.mod(7), snd ++ snd.sum);
+	snd = Select.ar(~easelPreset[\selFilt].mod(7), snd ++ snd.sum);
 
     snd = Limiter.ar(LeakDC.ar(snd * globalEnv));
-    snd = Pan2.ar(snd, pan, amp);
-    OffsetOut.ar(out, snd);
-}).add;
+	// snd = Pan2.ar(snd, pan, amp);
+	// OffsetOut.ar(out, snd);
+	snd = snd * ~easelPreset[\amp];
+});
+)
+
+Ndef(\easel).fadeTime_(16);
+
+Ndef(\easel).play(2);
+
+Ndef(\easel).release(32);
 
