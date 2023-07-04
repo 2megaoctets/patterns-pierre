@@ -1,0 +1,505 @@
+resetCycles
+
+ d1 $
+   whenmod "12 23 43" "11 21 40"
+  (
+    slow "1 1.5"
+     . (|* t1glide "3 0.21")
+     . (|* t2glide "0.76 3 1.4")
+     . (|* h1glide (slow 1.5 $ smooth cosine))
+     . (|* h2glide (slow "3 4" $ "3 4 12"))
+  ) $
+  every "<6 11>"
+  (within (0.25, 0.75)
+    (|* cfreq (segment 16 $ range 0.75 1 isaw))
+    . (|* accelerate "1 0.75 -0.5")
+  ) $
+ somecyclesBy 0.21
+ (
+   (|* sustain "0.0125 <0.0125 0.00125>")
+   . (|+ attack "0.01 0.0125")
+   . (|+ coarse "4 3 -1 0")
+   . (|* gain 1.1)
+  ) $
+ every 4
+ (swingBy ("3/8 [1/8 5/16]") "3 5 <2 4>" . slow "2 <0.5 2>" . (# accelerate "-1") . (|* freq (segment 16 $ range 0.65 1.22 saw))) $
+  stack [
+      -- listen 0 $
+      listen ((cF 1 "23") $
+      degOffsetBy (1/8) (cF 0 "33") $
+      whenmod 8 6 (listen 0) $
+      whenmod 5 3 (0.5 <~) $
+      every 3 (chunk 4 (fast 2)) $
+      (<| freq (whenmod "6 4" 3 (0.25 ~>) $ "[1.7 [~ 0.1]] [~ 0.1] ~ [1.0 0.15]")) $
+      s "Sd_kickBlocks"
+        -- # amp 0.20000000298023
+        # begin 0.0
+        # end 0.2 -- 1.0
+        # speed 0.5 -- 1.0
+        # accelerate 0.6 -- 0.0
+        # sustain 1.0
+        # t1freq 400.0
+        # t1harmonic 2.0
+        # t1glide 0.1 -- 0.0099999997764826
+        # t1att 0.00050000002374873
+        # t1rel 0.0099999997764826
+        # t1curve "-4.0"
+        # t1del 0.0
+        # t1amp 1.0
+        # t2freq 50.0
+        # t2harmonic 3.4400000572205
+        # t2glide 0.0099999997764826
+        # t2att 9.9999997473788e-05
+        # t2rel 0.30000001192093
+        # t2curve "-4.0"
+        # t2del 0.0049999998882413
+        # t2amp 1.0
+        # h1freq 100.0
+        # h1harmonic 8.0
+        # h1glide 0.0099999997764826
+        # h1rq 0.60000002384186
+        # h1att 0.0010000000474975
+        # h1rel 0.019999999552965
+        # h1curve "-4.0"
+        # h1del 0.0010000000474975
+        # h1amp 1.0
+        # h2freq 1320.0
+        # h2harmonic 1.0
+        # h2glide 0.0
+        # h2att 0.003000000026077
+        # h2rel 0.029999999329448
+        # h2curve "-4.0"
+        # h2del 0.0
+        # h2amp 0.5
+        # cfreq 6100.0
+        # crq 1.0
+        # camp 1.4099999666214
+        # cdur 0.0010000000474975
+        # hpf 65
+        # orbit "1 [0 1] 0"
+      ,
+      -- listen 0 $
+      listen ((cF 1 "24")) $
+      degOffsetBy (1/12) (cF 0 "34") $
+      whenmod 5 2 (0.25 <~) $
+      whenmod 6 4 (|+ coarse "0 [0 1] [~ 6] [2 1]") $
+      every 4 (listen 0) $
+      -- whenmod 5 2 (jux (rev)) $
+      (<| t2freq (every 3 (0.25 ~>) $ slow 2 $ "[20 40 43 82] ~ [44 53 140 92] ~ [11 50 54 66] ~ [23 73 35 10] [12 34 50 91]")) $
+      s "Sd_kickBlocks"
+        -- # amp 0.20000000298023
+        # begin 0.0
+        # end 1.0
+        # speed 0.5 -- 1.0
+        # accelerate "0 -1.0 0"
+        # sustain 1.0
+        # freq "0.75" -- 1.0
+        # t1freq 400.0
+        # t1harmonic 2.0
+        # t1glide 0.0099999997764826
+        # t1att 0.00050000002374873
+        # t1rel 0.0099999997764826
+        # t1curve "-4.0"
+        # t1del 0.0
+        # t1amp 1.0
+        -- # t2freq 50.0
+        # t2harmonic 3.4400000572205
+        # t2glide 0.1 -- 0.0099999997764826
+        # t2att 9.9999997473788e-05
+        # t2rel 0.30000001192093
+        # t2curve "-4.0"
+        # t2del 0.0049999998882413
+        # t2amp 1.0
+        # h1freq 100.0
+        # h1harmonic 8.0
+        # h1glide 0.0099999997764826
+        # h1rq 0.60000002384186
+        # h1att 0.0010000000474975
+        # h1rel 0.019999999552965
+        # h1curve "-4.0"
+        # h1del 0.0010000000474975
+        # h1amp 1.0
+        # h2freq 1320.0
+        # h2harmonic 1.0
+        # h2glide 1 -- 0.0
+        # h2att 0.003000000026077
+        # h2rel 0.029999999329448
+        # h2curve "-4.0"
+        # h2del 0.0
+        # h2amp 0.5
+        # cfreq 6100.0
+        # crq 0.15 -- 1.0
+        # camp 1.4099999666214
+        # cdur 0.024 -- 0.0010000000474975
+        # hpf 130
+        # orbit "0 [0 1] 1"
+      ,
+      listen ((cF 1 "25")) $
+      degOffsetBy (3/8) (cF 0 "35") $
+      whenmod 7 4 (stut' 6 (3.125e-2) (|* speed "[1.1 1.35] 1.5")) $
+      every 4 (listen 0) $
+      every 3 (slow "[<0.5 1> 2] 2" . within (0.25, 0.5)(slowstripe 3)) $
+      (<| freq (every "<4 5>" (0.25 <~) $ every 7 (0.25 ~>) $ "0.7 [~ [7 11]] [9 [~ 10]] [~ 3]")) $
+      s "Sd_kickBlocks"
+        -- # amp 0.20000000298023
+        # begin 0.10
+        # end 0.7 -- 1.0
+        # speed 1 -- 0.36 -- 1.0
+        # accelerate "-0.6" -- 0.0
+        # sustain 0.6 -- 1.0
+        # t1freq 100 -- 400.0
+        # t1harmonic 7.14 --  2.0
+        # t1glide "-0.4" -- 0.0099999997764826
+        # t1att 0.00050000002374873
+        # t1rel 0.0099999997764826
+        # t1curve "-4.0"
+        # t1del 0.0
+        # t1amp 1.0
+        # t2freq 50 -- 50.0
+        # t2harmonic 2.23 -- 3.4400000572205
+        # t2glide 0.0099999997764826
+        # t2att 9.9999997473788e-05
+        # t2rel 0.30000001192093
+        # t2curve "-7.0"
+        # t2del 0.0049999998882413
+        # t2amp 1.0
+        # h1freq (slow 3.5 $ range 700 2400 saw)
+        # h1harmonic 12 -- 8.0
+        # h1glide 0.1 -- 0.0099999997764826
+        # h1rq 0.1 -- 0.60000002384186
+        # h1att 0.01 -- 0.0010000000474975
+        # h1rel 0.123 -- 0.019999999552965
+        # h1curve "-8.0"
+        # h1del 0.05 -- 0.0010000000474975
+        # h1amp 0.6 -- 1.0
+        # h2freq 8320.0
+        # h2harmonic 4.0
+        # h2glide 0.0
+        # h2att 0.0003000000026077
+        # h2rel 0.0129999999329448
+        # h2curve "-7.0"
+        # h2del 0.05 -- 0.0
+        # h2amp 0.431 --  0.5
+        # cfreq 6100.0
+        # crq 0.1 -- 1.0
+        # camp 0.7 -- 1.4099999666214
+        # cdur 0.032 -- 0.0010000000474975
+        # hpf 90
+        |* gain 0.8
+        # orbit 2
+]
+|* gain 1.03
+# cps 0.65
+
+d1 $
+  stack [
+    (<| freq "{10.02(<1 2 3?>,6,1) 20.2 30.4}%[6 | 4 | 8 | 6 | 4]") $
+    -- (<| freq "10.02(2,6,1) 20.2 30.4") $
+    degOffsetBy (1/3) (cF 0 "33") $
+    listen (cF 1 "23") $
+    s "Sd_clapthan"
+      # amp 0.20000000298023
+      # begin 0.0
+      # end 1.0
+      # speed "5 0.2 12" --  1.0
+      # accelerate 0.6 --  0.0
+      # sustain 1.0
+      -- # freq 49
+      # envL1 0.0
+      # envL2 1.0
+      # envL3 0.86 -- 0.5
+      # envL4 0.15 -- 1.0
+      # envT1 0.0010000000474975
+      # envT2 0.0099999997764826
+      # envT3 "0.2 0.8 0.33 0.02" -- 0.0010000000474975
+      # crv  "<17 4.2 -12>" -- 0.0
+      # hpfRq 0.8 -- 0.30000001192093
+      # gain 0.9
+      # orbit 2
+    ,
+    degOffsetBy ("-5/6") (cF 0 "34") $
+    listen (cF 1 "24") $
+    (<| mod2 (slow 3 $ "<100? 30> 2(2, 4) <0.5 10>")) $
+    -- (<| mod2 "100 2(2, 4) <0.5 10>") $
+    s "Sd_lcm2Sus"
+      # amp 0.20000000298023
+      # begin 0.0
+      # end 0.8 -- 1.0
+      # speed "0.4 [1.0 <0.1 1.3>]"
+      # accelerate 0.1
+      # att 0.1 -- 0.0001
+      # sustain 1 -- 1.6 -- 3.0
+      # rel "1 0.6 0.8"
+      # freq "<0.7 1> 0.7" -- 140.0
+      # envNoiseFrq1 (segment 6 $ rangex 100 2 $ slow "2 3" cosine) -- 0.30000001192093
+      # envNoiseFrq2 (segment 3 $ every 2 ((1/6) <~) $ range "<50 0.1 0.3>" 1 $ slow 2.3 tri) -- 0.33000001311302
+      # envNoiseVol 1.2 -- 0.30000001192093
+      # envInv "<0 1>"
+      # mod1 "<10 100.0943100452423>"
+      -- # mod2 "<500.048698425293 50>"
+      # gain 0.93
+      # hpf 90
+    ,
+    degOffsetBy ("4/6") (cF 0 "35") $
+    listen (cF 1 "25") $
+    every "<3 4>" ("<1/6 1/3>" <~) $
+    every 2 (fast 2) $
+    (<| t2amp ( "0.82 [0.75 [0.33 0.1]]*<1 2 [2 1]> [~ 0.55] 0.82@2 [~ 0.61]")) $
+    s "Sd_kickBlocks"
+      # amp 0.30000000298023
+      # begin 0.0
+      # end 1.0
+      # speed "[1 1.6]!6" -- 1.0
+      # accelerate 0.8
+      # sustain 1.0
+      # freq 1.0
+      # t1freq 9740.0
+      # t1harmonic 7 -- 2.0
+      # t1glide 0.1 -- 0.0099999997764826
+      # t1att 0.00050000002374873
+      # t1rel 0.01 -- 0.0099999997764826
+      # t1curve "-7" -- "-4.0"
+      # t1del 0.0
+      # t1amp 1.0
+      # t2freq 50.0
+      # t2harmonic 3.4400000572205
+      # t2glide 0.0099999997764826
+      # t2att 9.9999997473788e-05
+      # t2rel 0.30000001192093
+      # t2curve "-4.0"
+      # t2del 0.0049999998882413
+      -- # t2amp 1.0
+      # h1freq 1400.0
+      # h1harmonic 8.0
+      # h1glide 0.01 -- 0.0099999997764826
+      # h1rq 0.1 -- 0.60000002384186
+      # h1att 0.0010000000474975
+      # h1rel 0.019999999552965
+      # h1curve "-4.0"
+      # h1del 0.0010000000474975
+      # h1amp 1.0
+      # h2freq 6100 -- 1320.0
+      # h2harmonic 1.7 -- 1.0
+      # h2glide 0.7 -- 0.0
+      # h2att 0.003000000026077
+      # h2rel "0.04 0.02 <0.03 0.01?> 0.04" -- 0.029999999329448
+      # h2curve "-4.0"
+      # h2del 0.0
+      # h2amp 0.5
+      # cfreq 33100 -- 6100.0
+      # crq 0.3 -- 1.0
+      # camp 1.4099999666214
+      # cdur 0.001 -- 0.0010000000474975
+      # hpf "820 <2400 900>"
+      # hpq (slow 3 $ range 0.05 0.2 tri)
+      # pan (segment 18 $ fast 3.7 $ range "0" 1 tri)
+      # orbit 1
+    ,
+    listen (cF 1 "26") $
+    degOffsetBy (1/3) (cF 0 "36") $
+    (<| speed (slow 4 $ " ~ 0.6(4,6,1) ")) $
+    s "Sd_stochadiet2"
+      -- # amp 0.5
+      # begin 0.0
+      # end 0.3 -- 1.0
+      -- # speed 0.6
+      # sustain 3.0
+      # sdm 0.1 -- 1.0
+      # repeats 12 -- 32.0
+      # from 3 -- 8.0
+      # dest 14 -- 30.0
+      # lpf 8000
+      # vowel "< e>"
+      # orbit 2
+    ,
+    listen 1 $
+    s "~ superhex/3"
+      # rate 1
+      # accelerate 0.376
+      # freq 72
+      # gain 0.45
+      # att 0.5
+      # dec 0.9
+      # sus 1
+      # rel 3
+    ,
+    listen 1 $
+    s "Sd_vowelsynth"
+      # amp 0.46
+      # begin 0.0
+      # end 1.0
+      # speed 0.65
+      # accelerate 0
+      # attack 0.3
+      # decay 1.8
+      # sustain 2.0
+      # release 1.3
+      # freq "<2 24>"
+      # vel 0.84
+      # bend 0.176 -- 0.37
+      # vow "<3 <4 1>>"
+      # gain 1.1
+    ,
+    -- pattern fabien
+   listen (cF 1 "87") $
+   degOffsetBy (1/7) (cF 0 "16") $
+   every 2
+   (fast "1 2") $
+   (<| amp "[~ 0.9 0.6] [~ 0.9] [~ 0.9 0.6]") $
+   s "Sd_kickBlocks"
+     # begin 0.0
+     # end 1.0
+     # accelerate 0.87
+     # speed 0.5
+     # sustain 1.0
+     # t1freq 110.0
+     # t1harmonic 21.0
+     # t1glide 0.199
+     # t1att 0.0005
+     # t1rel 0.0099999997764826
+     # t1curve "-14.0"
+     # t1del 2.0
+     # t1amp 1.0
+     # t2freq 65.0
+     # t2harmonic 20.4400000572205
+     # t2glide 0.00099999997764826
+     # t2att 0.1
+     # t2rel 0.0030000001192093
+     # t2curve "-24.0"
+     # t2del 0.065
+     # t2amp 1.0
+     # h1freq 240.0
+     # h1harmonic 82.0
+     # h1glide 0.0099999997764826
+     # h1rq 0.60000002384186
+     # h1att 0.0010000000474975
+     # h1rel 0.019999999552965
+     # h1curve "-4.0"
+     # h1del 0.0010000000474975
+     # h1amp 1.0
+     # h2freq 1320.0
+     # h2harmonic 1.0
+     # h2glide 0.0
+     # h2att 0.003000000026077
+     # h2rel 0.029999999329448
+     # h2curve "-4.0"
+     # h2del 0.0
+     # h2amp 0.025
+     # cfreq 15600.0
+     # crq 0.4
+     # camp 0.099999666214
+     # cdur 0.041
+     # hpf 75
+     # gain 0.9
+   ,
+   listen (cF 1 "87") $
+   degOffsetBy (1/7) (cF 0 "16") $
+   -- (<| amp "[~ 0.9] [~ 0.9 0.6] [~ 0.6 0.9]") $
+   sometimesBy 0.21 (listen 0) $
+   ((0.5) <~) $
+   (<| amp "{[~ 0.9] [~ 0.9 0.6]}%4") $
+   s "Sd_windowsync"
+     # begin 0.0
+     # end 0.4
+     # sustain 0.4
+     # freq 30
+     # syncEgTop 12.0
+     # syncRatio 0.4
+     # syncDcy 0.125
+     # gain 0.57
+  ]
+  # cps 0.25
+
+
+d1 $
+  stack [
+    (<| freq "10.02(3,6,1) 20.2 30.4") $
+    degOffsetBy (1/3) (cF 0 "33") $
+    listen (cF 1 "23") $
+    s "Sd_clapthan"
+      # amp 0.20000000298023
+      # begin 0.0
+      # end 1.0
+      # speed "5 0.2 12" --  1.0
+      # accelerate 0.6 --  0.0
+      # sustain 1.0
+      -- # freq 49
+      # envL1 0.0
+      # envL2 1.0
+      # envL3 0.86 -- 0.5
+      # envL4 0.15 -- 1.0
+      # envT1 0.0010000000474975
+      # envT2 0.0099999997764826
+      # envT3 "0.2 0.8 0.33 0.02" -- 0.0010000000474975
+      # crv  "<17 4.2 -12>" -- 0.0
+      # hpfRq 0.8 -- 0.30000001192093
+      # orbit 2
+    ,
+    degOffsetBy ("-5/6") (cF 0 "34") $
+    listen (cF 1 "24") $
+    (<| mod2 "100 2(2, 4) <0.5 10>") $
+    s "Sd_lcm2Sus"
+      # amp 0.20000000298023
+      # begin 0.0
+      # end 0.8 -- 1.0
+      # speed "0.4 [1.0 <0.1 1.3>]"
+      # accelerate 0.1
+      # att 0.1 -- 0.0001
+      # sustain 1 -- 1.6 -- 3.0
+      # rel "1 0.6 0.8"
+      # freq "<0.7 1> 0.7" -- 140.0
+      # envNoiseFrq1 (segment 6 $ rangex 100 2 $ slow "2 3" cosine) -- 0.30000001192093
+      # envNoiseFrq2 (segment 3 $ every 2 ((1/6) <~) $ range "<50 0.1 0.3>" 1 $ slow 2.3 tri) -- 0.33000001311302
+      # envNoiseVol 1.2 -- 0.30000001192093
+      # envInv "<0 1>"
+      # mod1 "<10 100.0943100452423>"
+      -- # mod2 "<500.048698425293 50>"
+      # hpf 90
+  ]
+
+-- usine
+d1 $
+  stack [
+    (<| freq "10.02(3,6,1) 20.2 30.4") $
+    degOffsetBy (1/3) (cF 0 "33") $
+    listen (cF 1 "23") $
+    s "Sd_clapthan"
+      # amp 0.20000000298023
+      # begin 0.0
+      # end 1.0
+      # speed "5 0.2 12" --  1.0
+      # accelerate 0.6 --  0.0
+      # sustain 1.0
+      -- # freq 49
+      # envL1 0.0
+      # envL2 1.0
+      # envL3 0.86 -- 0.5
+      # envL4 0.15 -- 1.0
+      # envT1 0.0010000000474975
+      # envT2 0.0099999997764826
+      # envT3 "0.2 0.8 0.33 0.02" -- 0.0010000000474975
+      # crv  "<17 4.2 -12>" -- 0.0
+      # hpfRq 0.8 -- 0.30000001192093
+      # orbit 2
+    ,
+    degOffsetBy ("-5/6") (cF 0 "34") $
+    listen (cF 1 "24") $
+    (<| mod2 "100 2(2, 4) <0.5 10>") $
+    s "Sd_lcm2Sus"
+      # amp 0.20000000298023
+      # begin 0.0
+      # end 0.8 -- 1.0
+      # speed "0.4 [1.0 <0.1 1.3>]"
+      # accelerate 0.1
+      # att 0.1 -- 0.0001
+      # sustain 1 -- 1.6 -- 3.0
+      # rel "1 0.6 0.8"
+      # freq "<0.7 1> 0.7" -- 140.0
+      # envNoiseFrq1 (segment 6 $ rangex 100 2 $ slow "2 3" cosine) -- 0.30000001192093
+      # envNoiseFrq2 (segment 3 $ every 2 ((1/6) <~) $ range "<50 0.1 0.3>" 1 $ slow 2.3 tri) -- 0.33000001311302
+      # envNoiseVol 1.2 -- 0.30000001192093
+      # envInv "<0 1>"
+      # mod1 "<10 100.0943100452423>"
+      -- # mod2 "<500.048698425293 50>"
+      # hpf 90
+  ]

@@ -11,8 +11,7 @@ hSetEncoding stdout utf8
 -- fabien héberge superdirt :
 -- tidal <- startTidal (superdirtTarget {oLatency = 0.2, oAddress = "169.254.3.159", oPort = 57120}) (defaultConfig {cFrameTimespan = 1/20, cCtrlAddr = "0.0.0.0"})
 -- session jacktrip :
- tidal <- startTidal (superdirtTarget {oLatency = 0.2, oAddress = "127.0.0.1", oPort = 57120 }) (defaultConfig {cVerbose = True, cFrameTimespan = 1/20})
-
+ tidal <- startTidal (superdirtTarget {oLatency = 0.087, oAddress = "127.0.0.1", oPort = 57120 }) (defaultConfig {cVerbose = True, cFrameTimespan = 1/20, cQuantum = 4, cBeatsPerCycle = 4})
 :{
 let p = streamReplace tidal
     -- hush = streamHush tidal
@@ -1557,6 +1556,32 @@ let p = streamReplace tidal
     maxSeq = pF "maxSeq"
     dest = pF "dest"
     repeats = pF "repeats"
+    sinMod = pF "sinMod"
+    filtSpeed = pF "filtSpeed"
+    filtCenter = pF "filtCenter"
+    filtBw = pF "filtBw"
+    --
+    sin1Freq = pF "sin1Freq"
+    sin2Freq = pF "sin2Freq"
+    hpffreq = pF "hpffreq"
+    distAmt = pF "distAmt"
+    distMix = pF "distMix"
+    syncEgTop = pF "syncEgTop"
+    syncRatio = pF "syncRatio"
+    syncDcy = pF "syncDcy"
+    r = pF "r"
+    --
+    crvf1 = pF "crvf1"
+    crvf2 = pF "crvf2"
+    bw = pF "bw"
+    --
+    lfSrc1Sel = pF "lfSrc1Sel"
+    lfSrc1Rate = pF "lfSrc1Rate"
+    lfSrc2Sel = pF "lfSrc2Sel"
+    lfSrc2Rate = pF "lfSrc2Rate"
+    switchSrcRate = pF "switchSrcRate"
+    --
+    vow = pF "vow"
 :}
 
 :{
