@@ -1582,6 +1582,7 @@ let p = streamReplace tidal
     switchSrcRate = pF "switchSrcRate"
     --
     vow = pF "vow"
+    softGain = pF "softGain"
 :}
 
 :{
