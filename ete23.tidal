@@ -230,7 +230,51 @@ d1 $
       # atk 0.00449999998882413
       # rls 9.0
       # exciterRel 0.15 -- 0.050000000745058
+      -- clouds
+      # cloudswet "<0 <0.45 0> 0.45>" -- (slow "2 4" $ range 0.1 0.45 cosine)
+      # cloudsgain 2.4
+      # cloudspitch 0
+      # cloudspos (slow 4 $ range 0 0.6 saw)
+      # cloudssize "<0.5 0.85>"
+      # cloudsdens 0.5
+      # cloudstex (slow "3 6" $ range 0 1 sine)
+      # cloudsspread 0.5
+      # cloudsrvb 0.75
+      # cloudsfb "<0.33 0.45>"
+      # cloudsfreeze 0
+      # cloudsmode "<[0, 2] 3>"
+      # cloudslofi "<0 1>/4"
       # orbit 1
+    ,
+    listen (cF 1 "30") $
+    -- listen 0 $
+    sometimesBy 0.31 (listen 0) $
+    slow 2 $
+    (<| amp "[0.58 ~ 0.49@0.5] [0.58 [~ 0.49@0.5] ~]") $
+    s "Sd_sinBass"
+      -- # amp 0.6
+      # begin 0.0
+      # end 1.0
+      # speed 1.2
+      # accelerate 0.9
+      # attack 0.43
+      # release "0.12 0.2 0.4"
+      # sustain 1.0
+      # freq 0.34
+      # curve "-4.0"
+      # envLevel1 0.0
+      # envLevel2 133.0
+      # envLevel3 232.0
+      # envLevel4 70.0
+      # envLevel5 0.0
+      # envLevel6 60.0
+      # envTime1 0.05
+      # envTime2 "0.13 0.3"
+      # envTime3 0.25
+      # envTime4 1.0
+      # envTime5 0.5
+      # hpf4 112
+      # gain 1.55
   ]
   # cps 0.54
 
