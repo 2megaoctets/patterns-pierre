@@ -1,9 +1,11 @@
+
 resetCycles
 
 d1 $
   every 8 (spreadf [slow 2, listen 0]) $
   stack [
     -- listen 0 $
+    listen (cF 1 "23") $
     every "7 5" (listen "[1 0] 1 [1 0] 1") $
     every 3 ((2/5) <~) $
     every 2 (ghost' 0.4) $
@@ -38,6 +40,7 @@ d1 $
       # hpf 80
     ,
     -- listen 0 $
+    listen (cF 1 "24") $
     whenmod 8 "7 6" (listen "1 [0 1] <[1 [1 0]] 0>") $
     whenmod 6 "4 3" (slow "<[1 2] 1 [2 1]>") $
     every 2 ("<0.2 0.4 0.1>" <~) $
@@ -89,118 +92,97 @@ d1 $
       # cdur 0.0010000000474975
       # gain 0.9
     ,
-    listen 0 $
-    s "Sd_rim1"
-      # amp 0.20000000298023
+    -- listen 0 $
+    listen (cF 1 "25") $
+    whenmod 10 8 (listen 0) $
+    whenmod 7 "5 4" ("0 [<0.2 0.4> 0 <-0.2 0.2>]" <~) $
+    every 4 (density "1 [2 1]") $
+    every 3 (fast "1 [<1 [2 1] [[0.5 2] 1] [1 0.5]>]") $
+    (<| envf2T2  "~ [0.1 0.01 [~ 0.2] 0.004 [0.01 0.1]]") $
+    s "Sd_rim2"
+      # amp 0.13
       # begin 0.0
       # end 1.0
-      # speed 1.0
-      # accelerate 0.0
-      # sustain 1.0
-      # freq 440.0
-      # envfL1 1600.0
-      # envfL2 5600.0
-      # envfL3 800.0
-      # envfL4 250.0
+      # speed "{<1 0.3 [1 0.3]> 3}%1.5"
+      # accelerate 3
+      # sustain 0.42
+      # freq 0.314
+      # envfL1 23
+      # envfL2 56
+      # envfL3 80.0
+      # envfL4 50.0
       # envfT1 0.0010000000474975
-      # envfT2 0.0010000000474975
-      # envfT3 0.0010000000474975
+      # envfT2 0.1
+      # envfT3 "<0.001 0.01> 0.2 <0.02 0.005>" -- 0.0010000000474975
       # envf2L1 1000.0
-      # envf2L2 1600.0
-      # envf2L3 700.0
-      # envf2L4 200.0
-      # envf2T1 0.0010000000474975
-      # envf2T2 0.0010000000474975
-      # envf2T3 0.059999998658895
-      # sinFreq 400.0
+      # envf2L2 600.0
+      # envf2L3 170.0
+      # envf2L4 320.0
+      # envf2T1 0.01 -- 0.0010000000474975
+      -- # envf2T2 0.1 -- 0.0010000000474975
+      # envf2T3 0.3 -- 0.059999998658895
       # rhpfFreq 100.0
       # rhpfRq 1.0
       # bpfFreq1 327.0
       # bpfFreq2 430.0
       # bpfRq1 0.5
       # bpfRq2 0.5
-      # rlpfFreq 11100.0
+      # rlpfFreq 8100.0
       # rlpfRq 0.5
-      # orbit 1
-    ,
-    listen 0 $
-    s "Sd_cymnew"
-      # amp 0.20000000298023
-      # begin 0.0
-      # end 1.0
-      # speed 1.0
-      # accelerate 0.0
-      # sustain 1.0
-      # freq 6.0
+      # pan (fast "<3 4>" $ range "-1" 1 tri)
       # orbit 2
     ,
-    listen 0 $
-    s "Sd_main"
+    -- listen 0 $
+    listen (cF 1 "26") $
+    whenmod 7 5 (listen 0) $
+    slow "4 8" $
+    s "Sd_cymnew(1,5,<1 2>)"
       # amp 0.20000000298023
       # begin 0.0
       # end 1.0
-      # speed 1.0
+      # speed 0.75 -- 1.0
       # accelerate 0.0
+      # attack 0.3
       # sustain 1.0
-      # lev 10.0
-      # freq 50.0
-      # wnoiseAmp 1.0
-      # sinAmp 1.0
-      # sin1Freq 30.0
-      # envL1 0.0
-      # envL2 1.0
-      # envL3 0.0099999997764826
-      # envL4 1.2999999523163
-      # envL5 0.0
-      # envT1 0.0099999997764826
-      # envT2 0.0
-      # envT3 0.20000000298023
-      # envT4 0.0099999997764826
-      # clickCurve "-4.0"
-      # clickInScale 1.0
-      # clickEnvPow 1.0
-      # clickHpf 80.0
-      # clickHpRq 1.0
-      # clickLpf 13000.0
-      # clickLpRq 1.0
-      # clickAmp 1.0
-      # sel 0.0
-      # sin2Freq 40.0
-      # sin2Amp 0.30000001192093
-      # noiseAmp 1.0
-      # hpffreq 8000.0
-      # revtime 3.0
-      # distAmt 2.0
-      # distMix 0.0
-      # orbit 1
+      # release 2
+      # freq 2.0
+      # orbit 2
     ,
-    listen 0 $
+    -- listen 0 $
+    listen (cF 1 "27") $
+    every 8 (listen 0) $
+    every 2 ("<0.2 0.4> 0 <-0.2 0.2>" ~>) $
+    (<| sinPh2 "~ [~ 0.1] 0.2 ~@2") $
     s "Sd_fabHi1Sus"
       # amp 0.20000000298023
       # begin 0.0
       # end 1.0
-      # speed 1.0
+      # speed 2 -- 1.0
       # accelerate 0.0
-      # sustain 1.0
-      # freq 1.0
+      # attack 0.003
+      # sustain 2.0
+      # release 1
+      # freq 2.62 -- 1.0
       # wamp 0.5
       # envNatt 0.0010000000474975
       # envNrel 0.20000000298023
       # wbpfFreq 2800.0
-      # wbpfRq 1.0
+      # wbpfRq "0.1 0.8 1 0.06" -- 1.0
       # sinFrq1 2120.0
-      # sinFrq2 12423.0
+      # sinFrq2 "8000 12000" -- 12423.0
       # sinPh1 0.0
-      # sinPh2 0.019999999552965
+      -- # sinPh2 0.019999999552965
       # sinLev1 1.0
       # sinLev2 1.0
       # envSatt 0.0010000000474975
       # envSrel 0.20000000298023
-      # mix 0.5
+      # mix (slow 3.2 $ range 0 1 tri * square) -- 0.5
       # ffreq 6000.0
       # orbit 2
     ,
     -- listen 0 $
+    listen (cF 1 "28") $
+    whenmod 9 7 (listen 0) $
     every 5 (ghost' 0.3) $
     every 2 ("<1/5 3/5 0.1 0.3>" ~>) $
     -- (<| speed "~ 1 0.2 [1 2] <2 0.2>") $
@@ -229,31 +211,28 @@ d1 $
       # gain 0.89
       # orbit 2
     ,
-    listen 0 $
-    -- slow 2 $
-    -- (<| begin "<~ 0.3> [0.16 0.5] ~ [~ 0.81] <0.15 ~>") $
-    (<| syncRatio "{[12 21] ~ 12@2 1}%2.5") $
-    s "Sd_windowsync"
-      # amp 0.4
-      # begin 0
-      # end 1 -- "1.0 0.86"
-      -- # loop "<2 12 24>"
-      # speed (sine * 0.28 + 0.19)
-      # accelerate 4
-      # attack 0
-      # release  0.6 -- 2
-      # sustain 0.76
-      # freq 39.4 -- "<1245? 65.4> 120"
-      # syncEgTop "8.0 10"
-      -- # syncRatio "<12 21>"
-      # syncDcy 0.6
-      # pan (range 0.2 0.8 $ slow 2 $ square)
-      # gain 0.92
-      # orbit 2
-    ,
-    listen 1 $
-    s ""
+    listen (cF 1 "29") $
+    -- slow 5 $
+    fix (|* gain 0.0035) (freq 9324.5) $
+    (<| freq ("[268.5, <9324.5?0.75 8000 232>]")) $
+    s "Sd_tubularBell"
+      # amp 0.12 -- 0.20000000298023
+      # begin 0.0
+      # end 1.0
+      # speed "<0.25 0.012>" -- 1.0
+      # accelerate "<0 ! ! -0.75>" -- 0.0
+      # sustain 1.0
+      # release 2.2
+      -- # freq 268
+      # harmFreq 1.6 -- 1.0
+      # harmAmp 1.0
+      # harmTime 0.36 -- 1.0
+      # atk 0.00449999998882413
+      # rls 9.0
+      # exciterRel 0.15 -- 0.050000000745058
+      # orbit 1
   ]
+  # cps 0.54
 
 
 d1 $ s "Sd_kickBoomy"
