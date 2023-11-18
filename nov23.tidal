@@ -77,9 +77,10 @@ d1 $
       # gain 0.5
     ]
     ,
-    -- kick + snare
+    -- kick rapide
     listen (cF 1 "25") $
     degOffsetBy (3/10) (cF 0 "35") $
+    fix (# hpf 180) (fbPow 0.999 # baseFreq 0.1) $
     fix (|* sustain 0.18) (fbPow 0.999 # amp 0.325) $
     someCyclesBy 0.6
     ((# fbPow 0.999)  . (# pan (segment 5 $ range 0 1 sine))) $
@@ -90,9 +91,7 @@ d1 $
     -- every 4 (slow 2) $
     every 3 ("0 0.4@4" <~) $
     degradeBy "0 0.31 0 0.21" $
-    -- (<| accelerate "{[0.93 ~@0.5 <0.91 ~>] [~@0.5 <0.91 ~> <0.93 0.2>]}%2.5") $
     (<| accelerate "<2 0.93>(<11 13 9>,20,<0 2 1>)") $
-    -- (<| accelerate "0.2 0.93 2@0.5") $
     s "Sd_feedBackos"
       # amp 0.65
       # begin 0.0
@@ -105,13 +104,13 @@ d1 $
       # baseFreq "0.1 0.08"
       # freq 0.013
       # lpfFreq 12000
-      # hpf 110.5
+      # hpf 120
       # orbit 1
       # gain 1.14
     ,
     -- charley
     listen (cF 1 "26") $
-    degOffsetBy (3/7) (cF 0 "36") $
+    degOffsetBy (1/5) (cF 0 "36") $
     every 5 (listen 0) $
     whenmod 8 "4 6" (ghost' 0.2) $
     ((2/10) ~>) $
@@ -148,7 +147,7 @@ d1 $
       # bpfRq2 0.005
       # rlpfFreq 10100.0
       # rlpfRq 0.035
-      # pan (segment 7 $ fast 5.5 $ range 0 1 tri)
+      # pan (segment 35 $ fast 15 $ range 0 1 tri)
       # orbit 2
       # gain 0.54
     ,
@@ -215,4 +214,4 @@ d1 $
       # gain 1.5
   ]
   # cps 0.56
-  -- |* gain 1.08
+  |* gain 1.05
