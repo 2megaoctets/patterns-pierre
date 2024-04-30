@@ -1802,6 +1802,10 @@ let p = streamReplace tidal
     verbMod = pF "verbMod"
     bpfreq = pF "bpfreq"
     bpdb = pF "bpdb"
+    ---
+    freqFactor1 = pF "freqFactor1"
+    freqFactor2 = pF "freqFactor2"
+    num = pF "num"
     -- portedPlugins
     --
     -- Sd_analogBd
