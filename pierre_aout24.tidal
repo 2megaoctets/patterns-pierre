@@ -953,20 +953,20 @@ d1 $
         # phase "0.5 0.0" -- 0.0
   ]
 
--- en 6 1609
+-- sorry for happiness, en 6
 do
 -- resetCycles
 setcps 0.87
 d1 $
   stack [
     -- fm medium
-    listen 1 $
+    -- listen 0 $
       whenmod 4 2 (listen 0) $
       every 6 (listen 0) $
-      every 2 (rot (every 3 (shuffle 6) "0 1/6 0 1/3 -2/3 0")) $
       (<| envpT2 "{0.2@1.5 [~ 0.051] 0.3  0.03@1.5 1}%6") $
+      (every 2 (rot (every 3 (shuffle 6) "0 1/6 0 1/3 -2/3 0")) $
       (<| sustain "0.48 [0.19 0.3] 0.48") $
-        s "Sd_haty48"
+      s "Sd_haty48")
           # amp 0.20000001192093
           # begin 0.0
           # end 1.0
@@ -1006,15 +1006,17 @@ d1 $
           # rf2Freq 1065.0
           # rf2Rq 0.062000000476837
           # hpfFreq 499.0
+          # orbit 0
     ,
+    -- listen 0 $
+    every 5 (listen 0) $
+    wrandcat [
     -- friction aigue
-    listen 1 $
-      whenmod 8 6 (listen 0) $
-      every 5 (listen 0) $
-      (<| envT2 "0.081 0.3@2.5 [0.1 0.04] <0.1 0.24>@0.5 <0.41 0.21>") $
+      (whenmod 8 6 (listen 0) $
+      ((<| envT2 "0.081 0.3@2.5 [0.1 0.04] <0.1 0.24>@0.5 <0.41 0.21>") $
       (<| envT3 "<0.31 2.1> 0.2 0.41  0.01 0.1") $
       (<| rho "0.2 0.98 0.5 0.01 0.3") $
-        s "Sd_hiSin"
+        s "Sd_hiSin")
           # amp 0.20000000298023
           # begin 0.0
           # end 1.0
@@ -1043,9 +1045,41 @@ d1 $
           # sinAmp 1.30000001192093
           # modFreq 1040.20000000298023
           # pan (segment 12 $ fast 3 tri)
+          # gain 0.8
+          # lpf 8000
+          # orbit 1
+        ,  4)
+    ,
+      (whenmod 6 4 (listen 0) $
+      (<| modFreqFreq " 18.0(<1 3>,4,<0 1>) <23 19.4005>(<2 1 0>,4,<0 1>) <[72.71 300.0] 21.0>") $
+      -- (<| modPhaseFreq " 180(<1 3>,4,<0 1>) <23 19.4005>(<2 1 0>,4,<0 1>) <[72.71 300.0] 21.0>") $
+      s "Sd_chaosEngine"
+        # amp 0.20000000298023
+        # begin 0.0
+        # end 1.0
+        # speed 1.0
+        # accelerate "-0.5 0.76? 0" -- 0.0
+        # attack "0.153 0 0"
+        # sustain "0.15! 0.6" -- 1.0
+        # release 0.3
+        # modPhaseFreq 10.12345000356436
+        # modPhaseMul 78.0
+        # modPhaseAdd 9.0
+        # modAmpFreq 101.0
+        # modAmpMul 2.20000000298023
+        # modAmpAdd 0.80000001192093
+        # modOffsetFreq 125.0
+        # modOffsetWidth 0.5
+        # modOffsetMul 0.125
+        # modOffsetAdd "-0.25"
+        -- # modFreqFreq 150.0
+        # freq 810.0
+        # orbit 2
+      , 6)
+      ]
     ,
     -- noise attack
-    listen 1 $
+    -- listen 0 $
     whenmod 10 7 (listen 0) $
     whenmod 6 5 (loopAt 2) $
     every 4 (listen 0) $
@@ -1075,10 +1109,12 @@ d1 $
         # ffreq 4000.0
         # rq 0.10000000149012
         # bwr 1.0
-        # hpf 110
+        # hpf 310
         # lpf 3900
-        # pan (segment 6 $ fast 3 perlin)
+        # pan (segment 18 $ square * perlin)
+        # gain 0.96
         -- # hpq 0.3
+        # orbit 1
     ,
     -- lt + kick
     listen 1 $
